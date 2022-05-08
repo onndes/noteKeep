@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import getColorApp from "./assets/colorApp";
+import ButtonAddNote from "./src/components/ButtonAddNote/ButtonAddNote";
 import SearchPanel from "./src/components/SearchPanel/SearchPanel";
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
 
             <View style={styles.wrapper}>
                 <SearchPanel />
+                <ButtonAddNote />
             </View>
         </View>
     );
@@ -23,6 +25,7 @@ const styles = StyleSheet.create({
         backgroundColor: getColorApp().backgroundMain,
     },
     wrapper: {
+        flex: 1,
         paddingTop: 15,
         paddingRight: 10,
         paddingBottom: 10,
