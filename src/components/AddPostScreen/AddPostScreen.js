@@ -1,11 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import NavPanel from "./NavPanel";
 
-export default function AddPostScreen() {
+export default function AddPostScreen({ navigation }) {
     return (
-        <View style={styles.container}>
-            <Text>AddPostScreen</Text>
-        </View>
+        <>
+            <NavPanel navigation={navigation} />
+        </>
     );
 }
 

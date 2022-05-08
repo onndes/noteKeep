@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         flex: 1,
-        paddingTop: 15,
-        paddingRight: 10,
-        paddingBottom: 10,
-        paddingLeft: 10,
+        paddingTop: 20,
+        paddingRight: 15,
+        paddingBottom: 15,
+        paddingLeft: 15,
     },
 });
 

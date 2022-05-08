@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Pressable } from "react-native";
 import getColorApp from "../../../assets/colorApp";
-import IconMenu from "../../common/IconMenu";
+import IconMenu from "../../common/IconJsx/IconMenu";
 
 export default function SearchPanel() {
     return (
