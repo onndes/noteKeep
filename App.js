@@ -1,21 +1,45 @@
-import { StyleSheet, Text, View, StatusBar } from "react-native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StatusBar, StyleSheet, View } from "react-native";
 import getColorApp from "./assets/colorApp";
-import ButtonAddNote from "./src/components/ButtonAddNote/ButtonAddNote";
-import SearchPanel from "./src/components/SearchPanel/SearchPanel";
+import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
+import HomeScreen from "./src/components/HomeScreen/HomeScreen";
+
+
+const Stack = createNativeStackNavigator();
+
+const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: "rgb(255, 45, 85)",
+        background: getColorApp().backgroundMain,
+    },
+};
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <StatusBar
-                backgroundColor={getColorApp().backgroundMain}
-                barStyle='light-content'
-            />
-
-            <View style={styles.wrapper}>
-                <SearchPanel />
-                <ButtonAddNote />
+        <NavigationContainer theme={MyTheme}>
+            <View style={styles.container}>
+                <StatusBar
+                    backgroundColor={getColorApp().backgroundMain}
+                    barStyle='light-content'
+                />
+                <View style={styles.wrapper}>
+                    <Stack.Navigator
+                        screenOptions={{
+                            headerShown: false,
+                            backgroundColor: getColorApp().backgroundMain,
+                        }}>
+                        <Stack.Screen name='Home' component={HomeScreen} />
+                        <Stack.Screen
+                            name='AddPost'
+                            component={AddPostScreen}
+                        />
+                    </Stack.Navigator>
+                </View>
             </View>
-        </View>
+        </NavigationContainer>
     );
 }
 
