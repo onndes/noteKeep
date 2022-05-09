@@ -3,7 +3,6 @@ import { View, StyleSheet, Pressable } from "react-native";
 import getColorApp from "../../../assets/colorApp";
 
 export default function ButtonAddNote({ navigation }) {
-    console.log(navigation);
     return (
         <View style={styles.container}>
             <Pressable

@@ -13,5 +13,5 @@ export default function NavPanel({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {marginBottom: 16},
 });

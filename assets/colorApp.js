@@ -4,6 +4,7 @@ export default function getColorApp(theme = "dark") {
             backgroundMain: "#181c1f",
             backgroundAction: "#1f282d",
             light: "#eeeff1",
+            lightTwo: "#909497",
         };
     } else if (theme === "light") {
         return {};

@@ -1,10 +1,10 @@
+import React from "react";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar, StyleSheet, View } from "react-native";
 import getColorApp from "./assets/colorApp";
 import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
 import HomeScreen from "./src/components/HomeScreen/HomeScreen";
-
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +16,7 @@ const MyTheme = {
         background: getColorApp().backgroundMain,
     },
 };
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 export default function App() {
     return (

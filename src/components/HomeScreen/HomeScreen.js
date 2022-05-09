@@ -1,17 +1,15 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+
 import ButtonAddNote from "./ButtonAddNote";
 import SearchPanel from "./SearchPanel";
+import NotesList from "./NotesList";
 
 export default function HomeScreen({ navigation }) {
     return (
         <>
             <SearchPanel />
             <ButtonAddNote navigation={navigation} />
+            <NotesList />
         </>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {},
-});

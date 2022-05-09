@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: getColorApp().backgroundAction,
         borderRadius: 50,
+        marginBottom: 16,
     },
 
     wrapper: {
