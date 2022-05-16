@@ -2,13 +2,14 @@ import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
-import getColorApp from "../../../assets/colorApp";
+import getColorApp from "../../../utils/colorApp";
 
-export default function NotesList() {
+export default function NotesList({ selectedNotes, setSelectedNotes }) {
     const [notes, setNotes] = React.useState([]);
-    const [selectedNotes, setSelectedNotes] = React.useState([]);
     const [pressInNote, setPressInNote] = React.useState(null);
+
     const { getItem: getItemNotes } = useAsyncStorage("notes");
+    const { setItem: setItemAppBar } = useAsyncStorage("toggleAppBar");
 
     const readItemFromStorage = async () => {
         const notesItem = await getItemNotes();
@@ -19,6 +20,12 @@ export default function NotesList() {
     React.useEffect(() => {
         readItemFromStorage();
     }, []);
+
+    React.useEffect(() => {
+        if (!!selectedNotes.length) {
+            setItemAppBar("backgroundMain");
+        }
+    }, [selectedNotes]);
 
     const handlePressNote = (noteId) => {
         setSelectedNotes(selectedNotes.filter((id) => id !== noteId));

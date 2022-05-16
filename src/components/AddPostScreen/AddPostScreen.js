@@ -3,7 +3,7 @@ import { StyleSheet, TextInput } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
 
-import getColorApp from "../../../assets/colorApp";
+import getColorApp from "../../../utils/colorApp";
 import NavPanel from "./NavPanel";
 
 export default function AddPostScreen({ navigation }) {

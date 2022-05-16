@@ -6,11 +6,11 @@ export default function getColorApp(theme = "dark") {
             light: "#eeeff1",
             lightTwo: "#73777a",
             selected: "#69d5ff",
-            pressIn: "#2d3134"
+            pressIn: "#2d3134",
         };
     } else if (theme === "light") {
         return {};
     }
     return {};
 }
-3;
+ 

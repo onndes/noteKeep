@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Pressable } from "react-native";
-import getColorApp from "../../../assets/colorApp";
+import getColorApp from "../../../utils/colorApp";
 import IconMenu from "../../common/IconJsx/IconMenu";
 
 export default function SearchPanel() {
@@ -23,8 +23,10 @@ export default function SearchPanel() {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: getColorApp().backgroundAction,
+
         borderRadius: 50,
         marginBottom: 16,
+        marginTop: 16,
     },
 
     wrapper: {
