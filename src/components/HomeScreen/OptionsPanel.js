@@ -7,7 +7,11 @@ import DropDownMenu from "./DropDownMenu";
 
 const colorApp = getColorApp();
 
-export default function OptionsPanel({ setSelectedNotes }) {
+export default function OptionsPanel({
+    setSelectedNotes,
+    selectedNotes,
+    setNotes,
+}) {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
@@ -17,7 +21,11 @@ export default function OptionsPanel({ setSelectedNotes }) {
                     </Pressable>
                 </View>
                 <View style={styles.menuBox}>
-                    <DropDownMenu />
+                    <DropDownMenu
+                        selectedNotes={selectedNotes}
+                        setSelectedNotes={setSelectedNotes}
+                        setNotes={setNotes}
+                    />
                 </View>
             </View>
         </View>
@@ -26,7 +34,7 @@ export default function OptionsPanel({ setSelectedNotes }) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 16,
+        paddingTop: 8,
         marginBottom: 16,
         backgroundColor: colorApp.backgroundAction,
     },

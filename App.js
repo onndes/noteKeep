@@ -22,41 +22,60 @@ const MyTheme = {
 const colorApp = getColorApp();
 
 export default function App() {
-    const [colorAppBar, setColorAppBar] = React.useState(null);
+    const [notes, setNotes] = React.useState([]);
+
+    const [colorAppBar, setColorAppBar] = React.useState(
+        colorApp.backgroundMain,
+    );
+
     const { getItem: getItemToggleAppBar } = useAsyncStorage("toggleAppBar");
 
     const readItemAppBarr = async () => {
-        const notesItem = await getItemToggleAppBar();
-        setColorAppBar(notesItem);
+        const color = await getItemToggleAppBar();
+        setColorAppBar(color);
     };
 
     React.useEffect(() => {
-        readItemAppBarr();
+        const t = setInterval(() => {
+            readItemAppBarr();
+        }, 100);
+        return () => {
+            clearInterval(t);
+        };
     }, []);
-
-    const statusBatColor = console.log("==>", statusBatColor);
+  
     return (
         <NavigationContainer theme={MyTheme}>
             <View style={styles.container}>
                 <StatusBar
-                    backgroundColor={
-                        !!colorAppBar
-                            ? colorApp[colorAppBar]
-                            : colorApp.backgroundMain
-                    }
+                    backgroundColor={colorAppBar}
                     barStyle='light-content'
                 />
+
                 <View style={styles.wrapper}>
                     <Stack.Navigator
                         screenOptions={{
                             headerShown: false,
                             backgroundColor: colorApp.backgroundMain,
                         }}>
-                        <Stack.Screen name='Home' component={HomeScreen} />
-                        <Stack.Screen
-                            name='AddPost'
-                            component={AddPostScreen}
-                        />
+                        <Stack.Screen name='Home'>
+                            {(props) => (
+                                <HomeScreen
+                                    {...props}
+                                    notes={notes}
+                                    setNotes={setNotes}
+                                />
+                            )}
+                        </Stack.Screen>
+                        <Stack.Screen name='AddPost'>
+                            {(props) => (
+                                <AddPostScreen
+                                    {...props}
+                                    setNotes={setNotes}
+                                    notes={notes}
+                                />
+                            )}
+                        </Stack.Screen>
                     </Stack.Navigator>
                 </View>
             </View>

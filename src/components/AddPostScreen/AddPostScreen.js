@@ -6,7 +6,7 @@ import uuid from "react-native-uuid";
 import getColorApp from "../../../utils/colorApp";
 import NavPanel from "./NavPanel";
 
-export default function AddPostScreen({ navigation }) {
+export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
     const [title, setTitle] = React.useState("");
     const [text, setText] = React.useState("");
     const [notes, setNotes] = React.useState([]);
@@ -18,10 +18,10 @@ export default function AddPostScreen({ navigation }) {
 
     const readItemFromStorage = async () => {
         const item = await getItem();
-        const value = item ? JSON.parse(item) : null;
+        const value = item ? JSON.parse(item) : [];
         setNotes(value);
     };
-    
+
     React.useEffect(() => {
         const unsubscribe = navigation.addListener("beforeRemove", () => {
             if (title.length || text.length) {
@@ -31,7 +31,9 @@ export default function AddPostScreen({ navigation }) {
                     title,
                     text,
                 };
+             
                 writeItemToStorage(JSON.stringify([...notes, newNote]));
+                setNoteApp([...notes, newNote]);
             }
         });
 

@@ -4,14 +4,20 @@ import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 import getColorApp from "../../../utils/colorApp";
 
-export default function NotesList({ selectedNotes, setSelectedNotes }) {
-    const [notes, setNotes] = React.useState([]);
+export default function NotesList({
+    selectedNotes,
+    setSelectedNotes,
+    notes,
+    setNotes,
+}) {
+    // const [notes, setNotes] = React.useState([]);
     const [pressInNote, setPressInNote] = React.useState(null);
 
-    const { getItem: getItemNotes } = useAsyncStorage("notes");
+    const { getItem: getItemNotes, removeItem } = useAsyncStorage("notes");
     const { setItem: setItemAppBar } = useAsyncStorage("toggleAppBar");
 
     const readItemFromStorage = async () => {
+        // await removeItem();
         const notesItem = await getItemNotes();
         const notesValue = notesItem ? JSON.parse(notesItem) : [];
         setNotes(notesValue);
@@ -30,9 +36,9 @@ export default function NotesList({ selectedNotes, setSelectedNotes }) {
     const handlePressNote = (noteId) => {
         setSelectedNotes(selectedNotes.filter((id) => id !== noteId));
     };
-
+ 
     return (
-        <View>
+        <View style={styles.container}>
             {!!notes.length ? (
                 notes.map((note) => {
                     const selectedStyle =
@@ -41,6 +47,7 @@ export default function NotesList({ selectedNotes, setSelectedNotes }) {
 
                     const pressInStyle =
                         pressInNote === note.id && styles.notePressIn;
+
                     return (
                         <Pressable
                             key={note.id}
@@ -71,6 +78,10 @@ export default function NotesList({ selectedNotes, setSelectedNotes }) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        zIndex: -1,
+        elevation: -1,
+    },
     title: { color: "white", fontSize: 17 },
     text: { color: "white", fontSize: 15 },
     noteContainer: {

@@ -8,19 +8,21 @@ import OptionsPanel from "./OptionsPanel";
 import getColorApp from "../../../utils/colorApp";
 import { View } from "react-native";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, notes, setNotes }) {
     const [selectedNotes, setSelectedNotes] = React.useState([]);
 
     const { setItem: setItemToggleAppBar } = useAsyncStorage("toggleAppBar");
 
     React.useEffect(() => {
-        if (!selectedNotes.length) {
-            handleSetItemToggleAppBar();
+        if (!!selectedNotes.length) {
+            handleSetItemToggleAppBar(getColorApp().backgroundAction);
+        } else {
+            handleSetItemToggleAppBar(getColorApp().backgroundMain);
         }
     }, [selectedNotes]);
 
-    const handleSetItemToggleAppBar = async () => {
-        await setItemToggleAppBar("backgroundAction");
+    const handleSetItemToggleAppBar = async (color) => {
+        await setItemToggleAppBar(color);
     };
 
     return (
@@ -30,10 +32,16 @@ export default function HomeScreen({ navigation }) {
                     <SearchPanel />
                 </View>
             ) : (
-                <OptionsPanel setSelectedNotes={setSelectedNotes} />
+                <OptionsPanel
+                    setNotes={setNotes}
+                    selectedNotes={selectedNotes}
+                    setSelectedNotes={setSelectedNotes}
+                />
             )}
             <View style={{ paddingRight: 15, paddingLeft: 15 }}>
                 <NotesList
+                    notes={notes}
+                    setNotes={setNotes}
                     selectedNotes={selectedNotes}
                     setSelectedNotes={setSelectedNotes}
                 />
