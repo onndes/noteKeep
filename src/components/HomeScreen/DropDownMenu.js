@@ -29,8 +29,8 @@ export default function DropDownMenu({
         setSelectedNotes([]);
         setNotes(updateListNote);
 
-        await setItemNotes(JSON.stringify(updateListNote));
         setOpenMenu(false);
+        await setItemNotes(JSON.stringify(updateListNote));
     };
 
     return (

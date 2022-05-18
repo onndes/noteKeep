@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
 
@@ -31,7 +31,7 @@ export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
                     title,
                     text,
                 };
-             
+
                 writeItemToStorage(JSON.stringify([...notes, newNote]));
                 setNoteApp([...notes, newNote]);
             }
@@ -49,7 +49,7 @@ export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
     };
 
     return (
-        <>
+        <View style={styles.container}>
             <NavPanel navigation={navigation} />
             <TextInput
                 style={styles.inputTitle}
@@ -65,12 +65,14 @@ export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
                 onChangeText={(text) => onChangeText(text)}
                 value={text}
             />
-        </>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {},
+    container: {
+      padding: 16
+    },
     inputTitle: {
         fontSize: 24,
         color: getColorApp().light,
