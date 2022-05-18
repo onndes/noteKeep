@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Pressable } from "react-native";
+import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 import getColorApp from "../../../utils/colorApp";
@@ -36,9 +36,9 @@ export default function NotesList({
     const handlePressNote = (noteId) => {
         setSelectedNotes(selectedNotes.filter((id) => id !== noteId));
     };
- 
+
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             {!!notes.length ? (
                 notes.map((note) => {
                     const selectedStyle =
@@ -73,12 +73,13 @@ export default function NotesList({
             ) : (
                 <Text style={{ color: "white" }}>нет записей</Text>
             )}
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        // flex: 1,
         zIndex: -1,
         elevation: -1,
     },
@@ -88,8 +89,9 @@ const styles = StyleSheet.create({
         padding: 16,
         borderColor: getColorApp().lightTwo,
         borderWidth: 1,
-        borderRadius: 18,
+        borderRadius: 8,
         marginBottom: 12,
+        marginHorizontal: 8,
     },
     noteContainerSelected: {
         borderWidth: 3,

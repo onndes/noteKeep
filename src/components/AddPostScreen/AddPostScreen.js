@@ -59,6 +59,7 @@ export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
                 value={title}
             />
             <TextInput
+                multiline={true}
                 style={styles.text}
                 placeholder='Текст'
                 placeholderTextColor={getColorApp().lightTwo}
@@ -71,7 +72,7 @@ export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
 
 const styles = StyleSheet.create({
     container: {
-      padding: 16
+        padding: 16,
     },
     inputTitle: {
         fontSize: 24,

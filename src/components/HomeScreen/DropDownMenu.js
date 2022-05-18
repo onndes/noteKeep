@@ -26,11 +26,11 @@ export default function DropDownMenu({
             return !selectedNotes.find((id) => note.id == id);
         });
 
-        setSelectedNotes([]);
         setNotes(updateListNote);
 
-        setOpenMenu(false);
         await setItemNotes(JSON.stringify(updateListNote));
+        setOpenMenu(false);
+        setSelectedNotes([]);
     };
 
     return (

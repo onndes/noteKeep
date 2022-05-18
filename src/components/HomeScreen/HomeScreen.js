@@ -38,7 +38,7 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
                     setSelectedNotes={setSelectedNotes}
                 />
             )}
-            <View style={{ paddingRight: 15, paddingLeft: 15 }}>
+            <View style={{ flex: 1 }}>
                 <NotesList
                     notes={notes}
                     setNotes={setNotes}
