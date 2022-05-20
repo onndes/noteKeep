@@ -29,15 +29,10 @@ export default function DropDownMenu({
     };
 
     const handleCopy = () => {
-        const newCopyNotes = notes
-            .filter(
-                (note) =>
-                    note.id === selectedNotesIds.find((id) => id === note.id),
-            )
-            .map((note) => ({ ...note, id: uuid.v4() }));
-
-        setNotes([...notes, ...newCopyNotes]);
-
+        const newCopyNote = notes.find(
+            (note) => note.id === selectedNotesIds[0],
+        );
+        setNotes([{ ...newCopyNote, id: uuid.v4() }, ...notes]);
         setOpenMenu(false);
         setSelectedNotesIds([]);
     };
@@ -71,13 +66,16 @@ export default function DropDownMenu({
                                     Удалить
                                 </Text>
                             </Pressable>
-                            <Pressable
-                                onPress={handleCopy}
-                                style={styles.menuButton}>
-                                <Text style={styles.menuButtonText}>
-                                    Создать копию
-                                </Text>
-                            </Pressable>
+
+                            {selectedNotesIds.length === 1 && (
+                                <Pressable
+                                    onPress={handleCopy}
+                                    style={styles.menuButton}>
+                                    <Text style={styles.menuButtonText}>
+                                        Создать копию
+                                    </Text>
+                                </Pressable>
+                            )}
                         </View>
                     </View>
                 </>
