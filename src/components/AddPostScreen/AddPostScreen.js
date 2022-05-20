@@ -6,9 +6,18 @@ import uuid from "react-native-uuid";
 import getColorApp from "../../../utils/colorApp";
 import NavPanel from "./NavPanel";
 
-export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
-    const [title, setTitle] = React.useState("");
-    const [text, setText] = React.useState("");
+export default function AddPostScreen({
+    navigation,
+    route: { params },
+    setNotes: setNoteApp,
+    notes: notesApp,
+}) {
+    const [title, setTitle] = React.useState(
+        params?.titleEditableNote ? params.titleEditableNote : "",
+    );
+    const [text, setText] = React.useState(
+        params?.textEditableNote ? params.textEditableNote : "",
+    );
     const [notes, setNotes] = React.useState([]);
 
     const { getItem, setItem } = useAsyncStorage("notes");
@@ -25,15 +34,25 @@ export default function AddPostScreen({ navigation, setNotes: setNoteApp }) {
     React.useEffect(() => {
         const unsubscribe = navigation.addListener("beforeRemove", () => {
             if (title.length || text.length) {
-                const id = uuid.v4();
+                const id = params?.idEditNote ? params.idEditNote : uuid.v4();
                 const newNote = {
                     id,
                     title,
                     text,
                 };
-
-                writeItemToStorage(JSON.stringify([...notes, newNote]));
-                setNoteApp([...notes, newNote]);
+                if (params?.idEditNote) {
+                    const updateNotes = notesApp.map((note) => {
+                        if (note.id === params.idEditNote) {
+                            return newNote;
+                        }
+                        return note;
+                    });
+                    writeItemToStorage(JSON.stringify(updateNotes));
+                    setNoteApp(updateNotes);
+                } else {
+                    writeItemToStorage(JSON.stringify([...notes, newNote]));
+                    setNoteApp([...notes, newNote]);
+                }
             }
         });
 

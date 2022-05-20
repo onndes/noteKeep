@@ -3,21 +3,21 @@ import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 import getColorApp from "../../../utils/colorApp";
+import AddPostScreen from "../AddPostScreen/AddPostScreen";
 
 export default function NotesList({
     selectedNotes,
     setSelectedNotes,
     notes,
     setNotes,
+    navigation,
 }) {
-    // const [notes, setNotes] = React.useState([]);
     const [pressInNote, setPressInNote] = React.useState(null);
 
-    const { getItem: getItemNotes, removeItem } = useAsyncStorage("notes");
+    const { getItem: getItemNotes } = useAsyncStorage("notes");
     const { setItem: setItemAppBar } = useAsyncStorage("toggleAppBar");
 
     const readItemFromStorage = async () => {
-        // await removeItem();
         const notesItem = await getItemNotes();
         const notesValue = notesItem ? JSON.parse(notesItem) : [];
         setNotes(notesValue);
@@ -33,8 +33,21 @@ export default function NotesList({
         }
     }, [selectedNotes]);
 
-    const handlePressNote = (noteId) => {
-        setSelectedNotes(selectedNotes.filter((id) => id !== noteId));
+    const handlePressNote = (note) => {
+        if (!!selectedNotes.length) {
+            const isSelectedNote = selectedNotes.find((id) => id === note.id);
+            if (isSelectedNote) {
+                setSelectedNotes(selectedNotes.filter((id) => id !== note.id));
+            } else {
+                setSelectedNotes([...selectedNotes, note.id]);
+            }
+        } else {
+            navigation.navigate("AddPost", {
+                titleEditableNote: note.title ? note.title : "",
+                textEditableNote: note.text ? note.text : "",
+                idEditNote: note.id,
+            });
+        }
     };
 
     return (
@@ -54,7 +67,9 @@ export default function NotesList({
                             onLongPress={() =>
                                 setSelectedNotes([...selectedNotes, note.id])
                             }
-                            onPress={() => handlePressNote(note.id)}
+                            onPress={() => {
+                                handlePressNote(note);
+                            }}
                             onPressIn={() => setPressInNote(note.id)}
                             onPressOut={() => setPressInNote(null)}>
                             <View

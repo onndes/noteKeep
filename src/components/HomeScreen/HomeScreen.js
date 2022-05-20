@@ -44,6 +44,7 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
                     setNotes={setNotes}
                     selectedNotes={selectedNotes}
                     setSelectedNotes={setSelectedNotes}
+                    navigation={navigation}
                 />
             </View>
             <ButtonAddNote navigation={navigation} />
