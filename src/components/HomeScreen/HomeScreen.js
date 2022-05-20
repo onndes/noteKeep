@@ -1,25 +1,25 @@
 import React from "react";
-
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import { View } from "react-native";
+
 import ButtonAddNote from "./ButtonAddNote";
 import SearchPanel from "./SearchPanel";
 import NotesList from "./NotesList";
 import OptionsPanel from "./OptionsPanel";
 import getColorApp from "../../../utils/colorApp";
-import { View } from "react-native";
 
 export default function HomeScreen({ navigation, notes, setNotes }) {
-    const [selectedNotes, setSelectedNotes] = React.useState([]);
+    const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
 
     const { setItem: setItemToggleAppBar } = useAsyncStorage("colorAppBar");
 
     React.useEffect(() => {
-        if (!!selectedNotes.length) {
+        if (!!selectedNotesIds.length) {
             handleSetItemToggleAppBar(getColorApp().backgroundAction);
         } else {
             handleSetItemToggleAppBar(getColorApp().backgroundMain);
         }
-    }, [selectedNotes]);
+    }, [selectedNotesIds]);
 
     const handleSetItemToggleAppBar = async (color) => {
         await setItemToggleAppBar(color);
@@ -27,7 +27,7 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
 
     return (
         <>
-            {!selectedNotes.length ? (
+            {!selectedNotesIds.length ? (
                 <View style={{ paddingRight: 15, paddingLeft: 15 }}>
                     <SearchPanel />
                 </View>
@@ -35,22 +35,22 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
                 <OptionsPanel
                     notes={notes}
                     setNotes={setNotes}
-                    selectedNotes={selectedNotes}
-                    setSelectedNotes={setSelectedNotes}
+                    selectedNotesIds={selectedNotesIds}
+                    setSelectedNotesIds={setSelectedNotesIds}
                 />
             )}
             <View style={{ flex: 1 }}>
                 <NotesList
                     notes={notes}
                     setNotes={setNotes}
-                    selectedNotes={selectedNotes}
-                    setSelectedNotes={setSelectedNotes}
+                    selectedNotesIds={selectedNotesIds}
+                    setSelectedNotesIds={setSelectedNotesIds}
                     navigation={navigation}
                 />
             </View>
             <ButtonAddNote
                 navigation={navigation}
-                setSelectedNotes={setSelectedNotes}
+                setSelectedNotesIds={setSelectedNotesIds}
             />
         </>
     );

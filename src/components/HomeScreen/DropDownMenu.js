@@ -1,14 +1,15 @@
 import React from "react";
 import { View, StyleSheet, Pressable, Text } from "react-native";
 import getColorApp from "../../../utils/colorApp";
+import uuid from "react-native-uuid";
 
 const colorApp = getColorApp();
 
 export default function DropDownMenu({
     notes,
     setNotes,
-    selectedNotes,
-    setSelectedNotes,
+    selectedNotesIds,
+    setSelectedNotesIds,
 }) {
     const [isOpenMenu, setOpenMenu] = React.useState(false);
 
@@ -16,15 +17,29 @@ export default function DropDownMenu({
         setOpenMenu(true);
     };
 
-    const handleDelete = async () => {
+    const handleDelete = () => {
         const updateListNote = notes.filter((note) => {
-            return !selectedNotes.find((id) => note.id == id);
+            return !selectedNotesIds.find((id) => note.id == id);
         });
 
         setNotes(updateListNote);
 
         setOpenMenu(false);
-        setSelectedNotes([]);
+        setSelectedNotesIds([]);
+    };
+
+    const handleCopy = () => {
+        const newCopyNotes = notes
+            .filter(
+                (note) =>
+                    note.id === selectedNotesIds.find((id) => id === note.id),
+            )
+            .map((note) => ({ ...note, id: uuid.v4() }));
+
+        setNotes([...notes, ...newCopyNotes]);
+
+        setOpenMenu(false);
+        setSelectedNotesIds([]);
     };
 
     return (
@@ -56,7 +71,9 @@ export default function DropDownMenu({
                                     Удалить
                                 </Text>
                             </Pressable>
-                            <Pressable style={styles.menuButton}>
+                            <Pressable
+                                onPress={handleCopy}
+                                style={styles.menuButton}>
                                 <Text style={styles.menuButtonText}>
                                     Создать копию
                                 </Text>

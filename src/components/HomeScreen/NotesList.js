@@ -7,8 +7,8 @@ import getColorApp from "../../../utils/colorApp";
 const colorApp = getColorApp();
 
 export default function NotesList({
-    selectedNotes,
-    setSelectedNotes,
+    selectedNotesIds,
+    setSelectedNotesIds,
     notes,
     navigation,
 }) {
@@ -17,18 +17,22 @@ export default function NotesList({
     const { setItem: setItemAppBar } = useAsyncStorage("colorAppBar");
 
     React.useEffect(() => {
-        if (!!selectedNotes.length) {
+        if (!!selectedNotesIds.length) {
             setItemAppBar("backgroundMain");
         }
-    }, [selectedNotes]);
+    }, [selectedNotesIds]);
 
     const handlePressNote = (note) => {
-        if (!!selectedNotes.length) {
-            const isSelectedNote = selectedNotes.find((id) => id === note.id);
+        if (!!selectedNotesIds.length) {
+            const isSelectedNote = selectedNotesIds.find(
+                (id) => id === note.id,
+            );
             if (isSelectedNote) {
-                setSelectedNotes(selectedNotes.filter((id) => id !== note.id));
+                setSelectedNotesIds(
+                    selectedNotesIds.filter((id) => id !== note.id),
+                );
             } else {
-                setSelectedNotes([...selectedNotes, note.id]);
+                setSelectedNotesIds([...selectedNotesIds, note.id]);
             }
         } else {
             navigation.navigate("AddPost", {
@@ -44,7 +48,7 @@ export default function NotesList({
             {!!notes.length ? (
                 notes.map((note) => {
                     const selectedStyle =
-                        selectedNotes.find((id) => id === note.id) &&
+                        selectedNotesIds.find((id) => id === note.id) &&
                         styles.noteContainerSelected;
 
                     const pressInStyle =
@@ -54,7 +58,10 @@ export default function NotesList({
                         <Pressable
                             key={note.id}
                             onLongPress={() =>
-                                setSelectedNotes([...selectedNotes, note.id])
+                                setSelectedNotesIds([
+                                    ...selectedNotesIds,
+                                    note.id,
+                                ])
                             }
                             onPress={() => {
                                 handlePressNote(note);

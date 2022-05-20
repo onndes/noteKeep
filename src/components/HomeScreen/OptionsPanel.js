@@ -8,8 +8,8 @@ import DropDownMenu from "./DropDownMenu";
 const colorApp = getColorApp();
 
 export default function OptionsPanel({
-    setSelectedNotes,
-    selectedNotes,
+    setSelectedNotesIds,
+    selectedNotesIds,
     setNotes,
     notes,
 }) {
@@ -17,14 +17,14 @@ export default function OptionsPanel({
         <View style={styles.container}>
             <View style={styles.wrapper}>
                 <View style={styles.closeButton}>
-                    <Pressable onPress={() => setSelectedNotes([])}>
+                    <Pressable onPress={() => setSelectedNotesIds([])}>
                         <IconClose fill={colorApp.light} />
                     </Pressable>
                 </View>
                 <View style={styles.menuBox}>
                     <DropDownMenu
-                        selectedNotes={selectedNotes}
-                        setSelectedNotes={setSelectedNotes}
+                        selectedNotesIds={selectedNotesIds}
+                        setSelectedNotesIds={setSelectedNotesIds}
                         setNotes={setNotes}
                         notes={notes}
                     />
