@@ -36,7 +36,7 @@ export default function DropDownMenu({
         setOpenMenu(false);
         setSelectedNotesIds([]);
     };
-
+  
     return (
         <View style={styles.container}>
             <Pressable onPress={handleButtonOpenMenu} style={{}}>

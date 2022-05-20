@@ -39,7 +39,7 @@ export default function AddPostScreen({
                     });
                     setNotes(updateNotes);
                 } else {
-                    setNotes ([...notes, newNote]);
+                    setNotes([...notes, newNote]);
                 }
             }
         });
@@ -51,6 +51,8 @@ export default function AddPostScreen({
         <View style={styles.container}>
             <NavPanel navigation={navigation} />
             <TextInput
+                multiline={true}
+                maxLength={50}
                 style={styles.inputTitle}
                 placeholder='Название'
                 placeholderTextColor={getColorApp().lightTwo}
