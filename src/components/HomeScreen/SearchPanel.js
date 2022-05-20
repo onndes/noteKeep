@@ -3,17 +3,19 @@ import { View, StyleSheet, TextInput, Pressable } from "react-native";
 import getColorApp from "../../../utils/colorApp";
 import IconMenu from "../../common/IconJsx/IconMenu";
 
+const colorApp = getColorApp();
+
 export default function SearchPanel() {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
                 <Pressable>
-                    <IconMenu fill={getColorApp().light} height='25' />
+                    <IconMenu fill={colorApp.light} height='25' />
                 </Pressable>
                 <TextInput
                     style={styles.inputSearch}
                     placeholder='Искать в заметках'
-                    placeholderTextColor={getColorApp().light}
+                    placeholderTextColor={colorApp.light}
                 />
             </View>
         </View>
@@ -22,8 +24,7 @@ export default function SearchPanel() {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: getColorApp().backgroundAction,
-
+        backgroundColor: colorApp.backgroundAction,
         borderRadius: 50,
         marginBottom: 16,
         marginTop: 16,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     inputSearch: {
-        color: getColorApp().light,
+        color: colorApp.light,
         fontSize: 17,
     },
 });

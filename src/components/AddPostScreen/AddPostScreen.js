@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import uuid from "react-native-uuid";
 
 import getColorApp from "../../../utils/colorApp";
@@ -9,8 +8,8 @@ import NavPanel from "./NavPanel";
 export default function AddPostScreen({
     navigation,
     route: { params },
-    setNotes: setNoteApp,
-    notes: notesApp,
+    notes,
+    setNotes,
 }) {
     const [title, setTitle] = React.useState(
         params?.titleEditableNote ? params.titleEditableNote : "",
@@ -18,18 +17,9 @@ export default function AddPostScreen({
     const [text, setText] = React.useState(
         params?.textEditableNote ? params.textEditableNote : "",
     );
-    const [notes, setNotes] = React.useState([]);
-
-    const { getItem, setItem } = useAsyncStorage("notes");
 
     const onChangeTitle = (value) => setTitle(value);
     const onChangeText = (value) => setText(value);
-
-    const readItemFromStorage = async () => {
-        const item = await getItem();
-        const value = item ? JSON.parse(item) : [];
-        setNotes(value);
-    };
 
     React.useEffect(() => {
         const unsubscribe = navigation.addListener("beforeRemove", () => {
@@ -41,31 +31,21 @@ export default function AddPostScreen({
                     text,
                 };
                 if (params?.idEditNote) {
-                    const updateNotes = notesApp.map((note) => {
+                    const updateNotes = notes.map((note) => {
                         if (note.id === params.idEditNote) {
                             return newNote;
                         }
                         return note;
                     });
-                    writeItemToStorage(JSON.stringify(updateNotes));
-                    setNoteApp(updateNotes);
+                    setNotes(updateNotes);
                 } else {
-                    writeItemToStorage(JSON.stringify([...notes, newNote]));
-                    setNoteApp([...notes, newNote]);
+                    setNotes ([...notes, newNote]);
                 }
             }
         });
 
         return unsubscribe;
     }, [navigation, title, text]);
-
-    React.useEffect(() => {
-        readItemFromStorage();
-    }, []);
-
-    const writeItemToStorage = async (newValue) => {
-        await setItem(newValue);
-    };
 
     return (
         <View style={styles.container}>

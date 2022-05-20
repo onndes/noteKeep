@@ -3,29 +3,18 @@ import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 import getColorApp from "../../../utils/colorApp";
-import AddPostScreen from "../AddPostScreen/AddPostScreen";
+
+const colorApp = getColorApp();
 
 export default function NotesList({
     selectedNotes,
     setSelectedNotes,
     notes,
-    setNotes,
     navigation,
 }) {
     const [pressInNote, setPressInNote] = React.useState(null);
 
-    const { getItem: getItemNotes } = useAsyncStorage("notes");
-    const { setItem: setItemAppBar } = useAsyncStorage("toggleAppBar");
-
-    const readItemFromStorage = async () => {
-        const notesItem = await getItemNotes();
-        const notesValue = notesItem ? JSON.parse(notesItem) : [];
-        setNotes(notesValue);
-    };
-
-    React.useEffect(() => {
-        readItemFromStorage();
-    }, []);
+    const { setItem: setItemAppBar } = useAsyncStorage("colorAppBar");
 
     React.useEffect(() => {
         if (!!selectedNotes.length) {
@@ -86,7 +75,9 @@ export default function NotesList({
                     );
                 })
             ) : (
-                <Text style={{ color: "white" }}>нет записей</Text>
+                <Text style={{ color: "white", paddingHorizontal: 25 }}>
+                    нет записей
+                </Text>
             )}
         </ScrollView>
     );
@@ -94,7 +85,6 @@ export default function NotesList({
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
         zIndex: -1,
         elevation: -1,
     },
@@ -102,7 +92,7 @@ const styles = StyleSheet.create({
     text: { color: "white", fontSize: 15 },
     noteContainer: {
         padding: 16,
-        borderColor: getColorApp().lightTwo,
+        borderColor: colorApp.lightTwo,
         borderWidth: 1,
         borderRadius: 8,
         marginBottom: 12,
@@ -110,9 +100,9 @@ const styles = StyleSheet.create({
     },
     noteContainerSelected: {
         borderWidth: 3,
-        borderColor: getColorApp().selected,
+        borderColor: colorApp.selected,
     },
     notePressIn: {
-        backgroundColor: getColorApp().pressIn,
+        backgroundColor: colorApp.pressIn,
     },
 });

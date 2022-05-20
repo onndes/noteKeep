@@ -2,12 +2,15 @@ import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import getColorApp from "../../../utils/colorApp";
 
-export default function ButtonAddNote({ navigation }) {
+export default function ButtonAddNote({ navigation, setSelectedNotes }) {
     return (
         <View style={styles.container}>
             <Pressable
                 style={styles.pressable}
-                onPress={() => navigation.navigate("AddPost")}>
+                onPress={() => {
+                    setSelectedNotes([]);
+                    navigation.navigate("AddPost");
+                }}>
                 <View style={styles.buttonBox}>
                     <View style={styles.verticalLine}></View>
                     <View style={styles.horizontalLine}></View>

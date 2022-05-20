@@ -2,10 +2,10 @@ import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
 import IconArrow from "../../common/IconJsx/IconArrow";
 
-export default function NavPanel({ navigation }) {
+export default function NavPanel({ navigation: { navigate } }) {
     return (
         <View style={styles.container}>
-            <Pressable onPress={() => navigation.navigate("Home")}>
+            <Pressable onPress={() => navigate("Home")}>
                 <IconArrow color='white' />
             </Pressable>
         </View>
@@ -13,5 +13,5 @@ export default function NavPanel({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    container: {marginBottom: 16},
+    container: { marginBottom: 16 },
 });

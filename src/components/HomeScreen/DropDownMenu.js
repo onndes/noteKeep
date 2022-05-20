@@ -1,34 +1,28 @@
 import React from "react";
 import { View, StyleSheet, Pressable, Text } from "react-native";
 import getColorApp from "../../../utils/colorApp";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 const colorApp = getColorApp();
 
 export default function DropDownMenu({
-    selectedNotes,
+    notes,
     setNotes,
+    selectedNotes,
     setSelectedNotes,
 }) {
     const [isOpenMenu, setOpenMenu] = React.useState(false);
-
-    const { getItem: getNotes, setItem: setItemNotes } =
-        useAsyncStorage("notes");
 
     const handleButtonOpenMenu = () => {
         setOpenMenu(true);
     };
 
     const handleDelete = async () => {
-        const notes = JSON.parse(await getNotes());
-
         const updateListNote = notes.filter((note) => {
             return !selectedNotes.find((id) => note.id == id);
         });
 
         setNotes(updateListNote);
 
-        await setItemNotes(JSON.stringify(updateListNote));
         setOpenMenu(false);
         setSelectedNotes([]);
     };

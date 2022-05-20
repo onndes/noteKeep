@@ -11,6 +11,7 @@ export default function OptionsPanel({
     setSelectedNotes,
     selectedNotes,
     setNotes,
+    notes,
 }) {
     return (
         <View style={styles.container}>
@@ -25,6 +26,7 @@ export default function OptionsPanel({
                         selectedNotes={selectedNotes}
                         setSelectedNotes={setSelectedNotes}
                         setNotes={setNotes}
+                        notes={notes}
                     />
                 </View>
             </View>

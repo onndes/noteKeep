@@ -11,7 +11,7 @@ import { View } from "react-native";
 export default function HomeScreen({ navigation, notes, setNotes }) {
     const [selectedNotes, setSelectedNotes] = React.useState([]);
 
-    const { setItem: setItemToggleAppBar } = useAsyncStorage("toggleAppBar");
+    const { setItem: setItemToggleAppBar } = useAsyncStorage("colorAppBar");
 
     React.useEffect(() => {
         if (!!selectedNotes.length) {
@@ -33,6 +33,7 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
                 </View>
             ) : (
                 <OptionsPanel
+                    notes={notes}
                     setNotes={setNotes}
                     selectedNotes={selectedNotes}
                     setSelectedNotes={setSelectedNotes}
@@ -47,7 +48,10 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
                     navigation={navigation}
                 />
             </View>
-            <ButtonAddNote navigation={navigation} />
+            <ButtonAddNote
+                navigation={navigation}
+                setSelectedNotes={setSelectedNotes}
+            />
         </>
     );
 }

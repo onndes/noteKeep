@@ -28,22 +28,42 @@ export default function App() {
         colorApp.backgroundMain,
     );
 
-    const { getItem: getItemToggleAppBar } = useAsyncStorage("toggleAppBar");
+    const { getItem: getNotesStorage, setItem: setNotesStorage } =
+        useAsyncStorage("notes");
+    const { getItem: getColorAppBar } = useAsyncStorage("colorAppBar");
 
-    const readItemAppBarr = async () => {
-        const color = await getItemToggleAppBar();
+    const readColorAppBar = async () => {
+        const color = await getColorAppBar();
         setColorAppBar(color);
     };
 
+    const readNotes = async () => {
+        const notesJson = await getNotesStorage();
+        const notes = notesJson ? JSON.parse(notesJson) : [];
+        setNotes(notes);
+    };
+
+    const writeNotes = async (updatedNotes) => {
+        await setNotesStorage(JSON.stringify(updatedNotes));
+    };
+
     React.useEffect(() => {
-        const t = setInterval(() => {
-            readItemAppBarr();
+        readNotes();
+    }, []);
+
+    React.useEffect(() => {
+        writeNotes(notes);
+    }, [notes]);
+
+    React.useEffect(() => {
+        const timerReadColorAppBar = setInterval(() => {
+            readColorAppBar();
         }, 100);
         return () => {
-            clearInterval(t);
+            clearInterval(timerReadColorAppBar);
         };
     }, []);
-  
+
     return (
         <NavigationContainer theme={MyTheme}>
             <View style={styles.container}>
