@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
 import getColorApp from "../../../utils/colorApp";
+import NotesListItem from "./NotesListItem";
 
 const colorApp = getColorApp();
 
@@ -11,6 +12,7 @@ export default function NotesList({
     setSelectedNotesIds,
     notes,
     navigation,
+    searchValue,
 }) {
     const [pressInNote, setPressInNote] = React.useState(null);
 
@@ -47,38 +49,17 @@ export default function NotesList({
         <ScrollView style={styles.container}>
             {!!notes.length ? (
                 notes.map((note) => {
-                    const selectedStyle =
-                        selectedNotesIds.find((id) => id === note.id) &&
-                        styles.noteContainerSelected;
-
-                    const pressInStyle =
-                        pressInNote === note.id && styles.notePressIn;
-
                     return (
-                        <Pressable
+                        <NotesListItem
                             key={note.id}
-                            onLongPress={() =>
-                                setSelectedNotesIds([
-                                    ...selectedNotesIds,
-                                    note.id,
-                                ])
-                            }
-                            onPress={() => {
-                                handlePressNote(note);
-                            }}
-                            onPressIn={() => setPressInNote(note.id)}
-                            onPressOut={() => setPressInNote(null)}>
-                            <View
-                                key={note.id}
-                                style={[
-                                    styles.noteContainer,
-                                    selectedStyle,
-                                    pressInStyle,
-                                ]}>
-                                <Text style={styles.title}>{note.title}</Text>
-                                <Text style={styles.text}>{note.text}</Text>
-                            </View>
-                        </Pressable>
+                            note={note}
+                            searchValue={searchValue}
+                            handlePressNote={handlePressNote}
+                            selectedNotesIds={selectedNotesIds}
+                            setSelectedNotesIds={setSelectedNotesIds}
+                            pressInNote={pressInNote}
+                            setPressInNote={setPressInNote}
+                        />
                     );
                 })
             ) : (
@@ -94,22 +75,5 @@ const styles = StyleSheet.create({
     container: {
         zIndex: -1,
         elevation: -1,
-    },
-    title: { color: "white", fontSize: 17 },
-    text: { color: "white", fontSize: 15 },
-    noteContainer: {
-        padding: 16,
-        borderColor: colorApp.lightTwo,
-        borderWidth: 1,
-        borderRadius: 8,
-        marginBottom: 12,
-        marginHorizontal: 8,
-    },
-    noteContainerSelected: {
-        borderWidth: 3,
-        borderColor: colorApp.selected,
-    },
-    notePressIn: {
-        backgroundColor: colorApp.pressIn,
     },
 });

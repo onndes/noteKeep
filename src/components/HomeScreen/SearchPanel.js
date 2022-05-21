@@ -5,7 +5,7 @@ import IconMenu from "../../common/IconJsx/IconMenu";
 
 const colorApp = getColorApp();
 
-export default function SearchPanel() {
+export default function SearchPanel({ searchValue, setSearchValue }) {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
@@ -13,6 +13,8 @@ export default function SearchPanel() {
                     <IconMenu fill={colorApp.light} height='25' />
                 </Pressable>
                 <TextInput
+                    onChangeText={(text) => setSearchValue(text)}
+                    value={searchValue}
                     style={styles.inputSearch}
                     placeholder='Искать в заметках'
                     placeholderTextColor={colorApp.light}

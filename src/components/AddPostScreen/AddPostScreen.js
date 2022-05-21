@@ -5,6 +5,8 @@ import uuid from "react-native-uuid";
 import getColorApp from "../../../utils/colorApp";
 import NavPanel from "./NavPanel";
 
+const colorApp = getColorApp();
+
 export default function AddPostScreen({
     navigation,
     route: { params },
@@ -55,7 +57,7 @@ export default function AddPostScreen({
                 maxLength={50}
                 style={styles.inputTitle}
                 placeholder='Название'
-                placeholderTextColor={getColorApp().lightTwo}
+                placeholderTextColor={colorApp.lightTwo}
                 onChangeText={(title) => onChangeTitle(title)}
                 value={title}
             />
@@ -63,7 +65,7 @@ export default function AddPostScreen({
                 multiline={true}
                 style={styles.text}
                 placeholder='Текст'
-                placeholderTextColor={getColorApp().lightTwo}
+                placeholderTextColor={colorApp.lightTwo}
                 onChangeText={(text) => onChangeText(text)}
                 value={text}
             />
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     },
     inputTitle: {
         fontSize: 24,
-        color: getColorApp().light,
+        color: colorApp.light,
         marginBottom: 12,
     },
     text: {

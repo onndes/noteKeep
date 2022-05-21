@@ -10,6 +10,7 @@ import getColorApp from "../../../utils/colorApp";
 
 export default function HomeScreen({ navigation, notes, setNotes }) {
     const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
+    const [searchValue, setSearchValue] = React.useState("");
 
     const { setItem: setItemToggleAppBar } = useAsyncStorage("colorAppBar");
 
@@ -29,7 +30,10 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
         <>
             {!selectedNotesIds.length ? (
                 <View style={{ paddingRight: 15, paddingLeft: 15 }}>
-                    <SearchPanel />
+                    <SearchPanel
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                    />
                 </View>
             ) : (
                 <OptionsPanel
@@ -46,6 +50,7 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
                     selectedNotesIds={selectedNotesIds}
                     setSelectedNotesIds={setSelectedNotesIds}
                     navigation={navigation}
+                    searchValue={searchValue}
                 />
             </View>
             <ButtonAddNote
