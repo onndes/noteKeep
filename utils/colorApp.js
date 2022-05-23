@@ -7,10 +7,11 @@ export default function getColorApp(theme = "dark") {
             lightTwo: "#73777a",
             selected: "#69d5ff",
             pressIn: "#2d3134",
+            backgroundDrawerMenu: "#1d2528",
+            backgroundDrawerMenuAction: "#40474d",
         };
     } else if (theme === "light") {
         return {};
     }
     return {};
 }
- 

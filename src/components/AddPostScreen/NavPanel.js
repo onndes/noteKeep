@@ -5,7 +5,9 @@ import IconArrow from "../../common/IconJsx/IconArrow";
 export default function NavPanel({ navigation: { navigate } }) {
     return (
         <View style={styles.container}>
-            <Pressable onPress={() => navigate("Home")}>
+            <Pressable
+                onPress={() => navigate("Home")}
+                style={styles.iconArrowBox}>
                 <IconArrow color='white' />
             </Pressable>
         </View>
@@ -13,5 +15,15 @@ export default function NavPanel({ navigation: { navigate } }) {
 }
 
 const styles = StyleSheet.create({
-    container: { marginBottom: 16 },
+    container: { marginBottom: 8 },
+    iconArrowBox: {
+        padding: 12,
+        paddingLeft: 4,
+        flex: 0,
+        maxWidth: 40,
+        flexGrow: 1,
+        alignSelf: "stretch",
+        justifySelf: "stretch",
+        marginTop: 32,
+    },
 });

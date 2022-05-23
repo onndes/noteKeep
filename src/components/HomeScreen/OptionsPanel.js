@@ -36,7 +36,7 @@ export default function OptionsPanel({
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 8,
+        paddingTop: 40,
         marginBottom: 16,
         backgroundColor: colorApp.backgroundAction,
     },

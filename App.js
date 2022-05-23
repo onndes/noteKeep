@@ -1,41 +1,36 @@
+// import 'react-native-gesture-handler';
 import React from "react";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { StyleSheet, View } from "react-native";
+import AsyncStorage, {
+    useAsyncStorage,
+} from "@react-native-async-storage/async-storage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar, StyleSheet, View } from "react-native";
-import getColorApp from "./utils/colorApp";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 
-import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
+import getColorApp from "./utils/colorApp";
 import HomeScreen from "./src/components/HomeScreen/HomeScreen";
+import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
+import DrawerMenu from "./src/components/DrawerMenu/DrawerMenu";
+
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createNativeStackNavigator();
+const colorApp = getColorApp();
 
 const MyTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
         primary: "rgb(255, 45, 85)",
-        background: getColorApp().backgroundMain,
+        background: colorApp.backgroundMain,
     },
 };
-
-const colorApp = getColorApp();
 
 export default function App() {
     const [notes, setNotes] = React.useState([]);
 
-    const [colorAppBar, setColorAppBar] = React.useState(
-        colorApp.backgroundMain,
-    );
-
     const { getItem: getNotesStorage, setItem: setNotesStorage } =
         useAsyncStorage("notes");
-    const { getItem: getColorAppBar } = useAsyncStorage("colorAppBar");
-
-    const readColorAppBar = async () => {
-        const color = await getColorAppBar();
-        setColorAppBar(color);
-    };
 
     const readNotes = async () => {
         const notesJson = await getNotesStorage();
@@ -55,25 +50,14 @@ export default function App() {
         writeNotes(notes);
     }, [notes]);
 
-    React.useEffect(() => {
-        const timerReadColorAppBar = setInterval(() => {
-            readColorAppBar();
-        }, 100);
-        return () => {
-            clearInterval(timerReadColorAppBar);
-        };
-    }, []);
-
     return (
         <NavigationContainer theme={MyTheme}>
             <View style={styles.container}>
-                <StatusBar
-                    backgroundColor={colorAppBar}
-                    barStyle='light-content'
-                />
+                <StatusBar style='light' />
 
                 <View style={styles.wrapper}>
                     <Stack.Navigator
+                        id='Stack'
                         screenOptions={{
                             headerShown: false,
                             backgroundColor: colorApp.backgroundMain,

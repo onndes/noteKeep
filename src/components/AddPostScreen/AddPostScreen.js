@@ -6,13 +6,13 @@ import getColorApp from "../../../utils/colorApp";
 import NavPanel from "./NavPanel";
 
 const colorApp = getColorApp();
-
 export default function AddPostScreen({
     navigation,
     route: { params },
     notes,
     setNotes,
 }) {
+    console.log(params?.titleEditableNote);
     const [title, setTitle] = React.useState(
         params?.titleEditableNote ? params.titleEditableNote : "",
     );
@@ -25,6 +25,7 @@ export default function AddPostScreen({
 
     React.useEffect(() => {
         const unsubscribe = navigation.addListener("beforeRemove", () => {
+            console.log("beforeRemove");
             if (title.length || text.length) {
                 const id = params?.idEditNote ? params.idEditNote : uuid.v4();
                 const newNote = {
@@ -45,7 +46,6 @@ export default function AddPostScreen({
                 }
             }
         });
-
         return unsubscribe;
     }, [navigation, title, text]);
 

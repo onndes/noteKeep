@@ -9,7 +9,7 @@ export default function SearchPanel({ searchValue, setSearchValue }) {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
-                <Pressable>
+                <Pressable onPress={() => console.log("pressDrawerMenu")}>
                     <IconMenu fill={colorApp.light} height='25' />
                 </Pressable>
                 <TextInput
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         backgroundColor: colorApp.backgroundAction,
         borderRadius: 50,
         marginBottom: 16,
-        marginTop: 16,
+        marginTop: 48,
     },
 
     wrapper: {

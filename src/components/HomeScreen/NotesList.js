@@ -16,14 +16,6 @@ export default function NotesList({
 }) {
     const [pressInNote, setPressInNote] = React.useState(null);
 
-    const { setItem: setItemAppBar } = useAsyncStorage("colorAppBar");
-
-    React.useEffect(() => {
-        if (!!selectedNotesIds.length) {
-            setItemAppBar("backgroundMain");
-        }
-    }, [selectedNotesIds]);
-
     const handlePressNote = (note) => {
         if (!!selectedNotesIds.length) {
             const isSelectedNote = selectedNotesIds.find(
@@ -47,7 +39,7 @@ export default function NotesList({
 
     return (
         <ScrollView style={styles.container}>
-            {!!notes.length ? (
+            {notes && !!notes.length ? (
                 notes.map((note) => {
                     return (
                         <NotesListItem
