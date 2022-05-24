@@ -1,22 +1,30 @@
 import React from "react";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { View } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
 import ButtonAddNote from "./ButtonAddNote";
 import NotesList from "./NotesList";
 import OptionsPanel from "./OptionsPanel";
-import getColorApp from "../../../utils/colorApp";
 import SearchPanel from "./SearchPanel";
+import DrawerMenu from "../DrawerMenu/DrawerMenu";
 
-export default function HomeScreen({ navigation, notes, setNotes }) {
+export default function HomeScreen({
+    navigation,
+    notes,
+    setNotes,
+    openDrawer,
+    setOpenDrawer,
+}) {
     const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
     const [searchValue, setSearchValue] = React.useState("");
+    const route = useRoute();
 
     return (
         <>
             {!selectedNotesIds.length ? (
                 <View style={{ paddingRight: 15, paddingLeft: 15 }}>
                     <SearchPanel
+                        setOpenDrawer={setOpenDrawer}
                         navigation={navigation}
                         searchValue={searchValue}
                         setSearchValue={setSearchValue}
@@ -43,6 +51,12 @@ export default function HomeScreen({ navigation, notes, setNotes }) {
             <ButtonAddNote
                 navigation={navigation}
                 setSelectedNotesIds={setSelectedNotesIds}
+            />
+            <DrawerMenu
+                openDrawer={openDrawer}
+                setOpenDrawer={setOpenDrawer}
+                navigation={navigation}
+                routeName={route.name}
             />
         </>
     );

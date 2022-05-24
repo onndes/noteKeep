@@ -28,6 +28,7 @@ const MyTheme = {
 
 export default function App() {
     const [notes, setNotes] = React.useState([]);
+    const [openDrawer, setOpenDrawer] = React.useState(false);
 
     const { getItem: getNotesStorage, setItem: setNotesStorage } =
         useAsyncStorage("notes");
@@ -68,6 +69,8 @@ export default function App() {
                                     {...props}
                                     notes={notes}
                                     setNotes={setNotes}
+                                    openDrawer={openDrawer}
+                                    setOpenDrawer={setOpenDrawer}
                                 />
                             )}
                         </Stack.Screen>

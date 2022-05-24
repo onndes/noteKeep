@@ -5,11 +5,15 @@ import IconMenu from "../../common/IconJsx/IconMenu";
 
 const colorApp = getColorApp();
 
-export default function SearchPanel({ searchValue, setSearchValue }) {
+export default function SearchPanel({
+    searchValue,
+    setSearchValue,
+    setOpenDrawer,
+}) {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
-                <Pressable onPress={() => console.log("pressDrawerMenu")}>
+                <Pressable onPress={() => setOpenDrawer(true)}>
                     <IconMenu fill={colorApp.light} height='25' />
                 </Pressable>
                 <TextInput
