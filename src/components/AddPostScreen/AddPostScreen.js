@@ -33,7 +33,6 @@ export default function AddPostScreen({
 
     React.useEffect(() => {
         const unsubscribe = navigation.addListener("blur", () => {
-            console.log("hardwareBackPress");
             if (
                 (title && title.trim().length) ||
                 (text && text.trim().length)

@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     drawerItemListContainer: {
         flex: 1,
         padding: 0,
-        paddingLeft: -20,
+        paddingLeft: -0,
         marginLeft: -10,
         marginTop: -40,
     },

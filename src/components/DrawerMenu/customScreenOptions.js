@@ -11,11 +11,13 @@ const customScreenOptions = {
     drawerActiveTintColor: colorApp.colorTextDrawerMenuAction,
     drawerInactiveTintColor: colorApp.light,
     drawerLabelStyle: {
-        padding: -5,
-        paddingLeft: 10,
+        padding: -4,
+        paddingLeft: 0,
+        marginLeft: -12,
         borderRadius: 50,
     },
     drawerItemStyle: {
+        paddingLeft: 4,
         borderRadius: 0,
         borderTopRightRadius: 30,
         borderBottomRightRadius: 30,

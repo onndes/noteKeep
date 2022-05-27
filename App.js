@@ -11,6 +11,8 @@ import HomeScreen from "./src/components/HomeScreen/HomeScreen";
 import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
 import CustomDrawer from "./src/components/DrawerMenu/CustomDrawer";
 import customScreenOptions from "./src/components/DrawerMenu/customScreenOptions";
+import IconBulb from "./src/common/IconJsx/IconBulb";
+import IconArchive from "./src/common/IconJsx/IconArchive";
 
 const Drawer = createDrawerNavigator();
 
@@ -59,7 +61,13 @@ export default function App() {
                         id='Stack'
                         drawerContent={(props) => <CustomDrawer {...props} />}
                         screenOptions={customScreenOptions}>
-                        <Drawer.Screen name='Home' >
+                        <Drawer.Screen
+                            name='Home'
+                            options={{
+                                drawerIcon: ({ color }) => (
+                                    <IconBulb fill={color} />
+                                ),
+                            }}>
                             {(props) => (
                                 <HomeScreen
                                     {...props}
@@ -70,7 +78,13 @@ export default function App() {
                                 />
                             )}
                         </Drawer.Screen>
-                        <Drawer.Screen name='AddPost' >
+                        <Drawer.Screen
+                            name='AddPost'
+                            options={{
+                                drawerIcon: ({ color }) => (
+                                    <IconArchive fill={color} />
+                                ),
+                            }}>
                             {(props) => (
                                 <AddPostScreen
                                     {...props}
