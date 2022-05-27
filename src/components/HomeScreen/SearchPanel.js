@@ -9,11 +9,12 @@ export default function SearchPanel({
     searchValue,
     setSearchValue,
     setOpenDrawer,
+    navigation,
 }) {
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
-                <Pressable onPress={() => setOpenDrawer(true)}>
+                <Pressable onPress={() => navigation.openDrawer()}>
                     <IconMenu fill={colorApp.light} height='25' />
                 </Pressable>
                 <TextInput

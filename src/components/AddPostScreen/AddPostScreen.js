@@ -4,29 +4,40 @@ import uuid from "react-native-uuid";
 
 import getColorApp from "../../../utils/colorApp";
 import NavPanel from "./NavPanel";
+import { useIsFocused } from "@react-navigation/native";
 
 const colorApp = getColorApp();
+
 export default function AddPostScreen({
     navigation,
     route: { params },
     notes,
     setNotes,
 }) {
-    console.log(params?.titleEditableNote);
     const [title, setTitle] = React.useState(
         params?.titleEditableNote ? params.titleEditableNote : "",
     );
     const [text, setText] = React.useState(
         params?.textEditableNote ? params.textEditableNote : "",
     );
-
+    const isFocused = useIsFocused();
     const onChangeTitle = (value) => setTitle(value);
     const onChangeText = (value) => setText(value);
 
     React.useEffect(() => {
-        const unsubscribe = navigation.addListener("beforeRemove", () => {
-            console.log("beforeRemove");
-            if (title.length || text.length) {
+        if (isFocused) {
+            setTitle(params?.titleEditableNote);
+            setText(params?.textEditableNote);
+        }
+    }, []);
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener("blur", () => {
+            console.log("hardwareBackPress");
+            if (
+                (title && title.trim().length) ||
+                (text && text.trim().length)
+            ) {
                 const id = params?.idEditNote ? params.idEditNote : uuid.v4();
                 const newNote = {
                     id,
@@ -45,6 +56,13 @@ export default function AddPostScreen({
                     setNotes([...notes, newNote]);
                 }
             }
+            setTitle("");
+            setText("");
+            navigation.setParams({
+                titleEditableNote: "",
+                textEditableNote: "",
+                idEditNote: null,
+            });
         });
         return unsubscribe;
     }, [navigation, title, text]);
@@ -58,16 +76,22 @@ export default function AddPostScreen({
                 style={styles.inputTitle}
                 placeholder='Название'
                 placeholderTextColor={colorApp.lightTwo}
-                onChangeText={(title) => onChangeTitle(title)}
-                value={title}
+                onChangeText={(title) => {
+                    onChangeTitle(title);
+                    onChangeText(text || params?.textEditableNote);
+                }}
+                value={title || params?.titleEditableNote}
             />
             <TextInput
                 multiline={true}
                 style={styles.text}
                 placeholder='Текст'
                 placeholderTextColor={colorApp.lightTwo}
-                onChangeText={(text) => onChangeText(text)}
-                value={text}
+                onChangeText={(text) => {
+                    onChangeText(text);
+                    onChangeTitle(title || params?.titleEditableNote);
+                }}
+                value={text || params?.textEditableNote}
             />
         </View>
     );

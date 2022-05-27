@@ -1,20 +1,19 @@
 // import 'react-native-gesture-handler';
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import AsyncStorage, {
-    useAsyncStorage,
-} from "@react-native-async-storage/async-storage";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { StatusBar } from "expo-status-bar";
 
 import getColorApp from "./utils/colorApp";
 import HomeScreen from "./src/components/HomeScreen/HomeScreen";
 import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
-import DrawerMenu from "./src/components/DrawerMenu/DrawerMenu";
+import CustomDrawer from "./src/components/DrawerMenu/CustomDrawer";
+import customScreenOptions from "./src/components/DrawerMenu/customScreenOptions";
 
-import { StatusBar } from "expo-status-bar";
+const Drawer = createDrawerNavigator();
 
-const Stack = createNativeStackNavigator();
 const colorApp = getColorApp();
 
 const MyTheme = {
@@ -55,15 +54,12 @@ export default function App() {
         <NavigationContainer theme={MyTheme}>
             <View style={styles.container}>
                 <StatusBar style='light' />
-
                 <View style={styles.wrapper}>
-                    <Stack.Navigator
+                    <Drawer.Navigator
                         id='Stack'
-                        screenOptions={{
-                            headerShown: false,
-                            backgroundColor: colorApp.backgroundMain,
-                        }}>
-                        <Stack.Screen name='Home'>
+                        drawerContent={(props) => <CustomDrawer {...props} />}
+                        screenOptions={customScreenOptions}>
+                        <Drawer.Screen name='Home' >
                             {(props) => (
                                 <HomeScreen
                                     {...props}
@@ -73,8 +69,8 @@ export default function App() {
                                     setOpenDrawer={setOpenDrawer}
                                 />
                             )}
-                        </Stack.Screen>
-                        <Stack.Screen name='AddPost'>
+                        </Drawer.Screen>
+                        <Drawer.Screen name='AddPost' >
                             {(props) => (
                                 <AddPostScreen
                                     {...props}
@@ -82,8 +78,8 @@ export default function App() {
                                     notes={notes}
                                 />
                             )}
-                        </Stack.Screen>
-                    </Stack.Navigator>
+                        </Drawer.Screen>
+                    </Drawer.Navigator>
                 </View>
             </View>
         </NavigationContainer>
