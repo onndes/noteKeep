@@ -8,16 +8,18 @@ import { StatusBar } from "expo-status-bar";
 
 import getColorApp from "./utils/colorApp";
 import HomeScreen from "./src/components/HomeScreen/HomeScreen";
-import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
 import CustomDrawer from "./src/components/DrawerMenu/CustomDrawer";
 import customScreenOptions from "./src/components/DrawerMenu/customScreenOptions";
 import IconBulb from "./src/common/IconJsx/IconBulb";
 import IconArchive from "./src/common/IconJsx/IconArchive";
+import ArchiveScreen from "./src/components/ArchiveScreen/ArchiveScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
 
 const Drawer = createDrawerNavigator();
 
 const colorApp = getColorApp();
-
+const Stack = createNativeStackNavigator();
 const MyTheme = {
     ...DefaultTheme,
     colors: {
@@ -64,6 +66,7 @@ export default function App() {
                         <Drawer.Screen
                             name='Home'
                             options={{
+                                drawerLabel: "Заметки",
                                 drawerIcon: ({ color }) => (
                                     <IconBulb fill={color} />
                                 ),
@@ -81,12 +84,33 @@ export default function App() {
                         <Drawer.Screen
                             name='AddPost'
                             options={{
+                                drawerItemStyle: {
+                                    height: 0,
+                                    padding: 0,
+                                    margin: 0,
+                                },
+                                drawerLabel: () => null,
+                                drawerIcon: () => null,
+                                title: null,
+                            }}>
+                            {(props) => (
+                                <AddPostScreen
+                                    {...props}
+                                    setNotes={setNotes}
+                                    notes={notes}
+                                />
+                            )}
+                        </Drawer.Screen>
+                        <Drawer.Screen
+                            name='Archive'
+                            options={{
+                                drawerLabel: "Архив",
                                 drawerIcon: ({ color }) => (
                                     <IconArchive fill={color} />
                                 ),
                             }}>
                             {(props) => (
-                                <AddPostScreen
+                                <ArchiveScreen
                                     {...props}
                                     setNotes={setNotes}
                                     notes={notes}
