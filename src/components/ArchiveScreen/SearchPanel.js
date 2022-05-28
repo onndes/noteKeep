@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     container: {
         marginBottom: 24,
         marginTop: 48,
+        marginHorizontal: 12
     },
 
     wrapper: {

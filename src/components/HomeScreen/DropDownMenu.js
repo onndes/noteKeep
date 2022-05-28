@@ -10,6 +10,8 @@ export default function DropDownMenu({
     setNotes,
     selectedNotesIds,
     setSelectedNotesIds,
+    archive,
+    setArchive,
 }) {
     const [isOpenMenu, setOpenMenu] = React.useState(false);
 
@@ -17,9 +19,20 @@ export default function DropDownMenu({
         setOpenMenu(true);
     };
 
+    const handleArchive = () => {
+        const selectedNotes = notes.filter((note) =>
+            selectedNotesIds.find((id) => note.id === id),
+        );
+        setArchive([...selectedNotes, ...archive]);
+
+        handleDelete();
+        setOpenMenu(false);
+        setSelectedNotesIds([]);
+    };
+
     const handleDelete = () => {
         const updateListNote = notes.filter((note) => {
-            return !selectedNotesIds.find((id) => note.id == id);
+            return !selectedNotesIds.find((id) => note.id === id);
         });
 
         setNotes(updateListNote);
@@ -36,7 +49,7 @@ export default function DropDownMenu({
         setOpenMenu(false);
         setSelectedNotesIds([]);
     };
-  
+
     return (
         <View style={styles.container}>
             <Pressable onPress={handleButtonOpenMenu} style={{}}>
@@ -54,7 +67,9 @@ export default function DropDownMenu({
 
                     <View style={styles.menuContainer}>
                         <View style={styles.menuWrapper}>
-                            <Pressable style={styles.menuButton}>
+                            <Pressable
+                                onPress={handleArchive}
+                                style={styles.menuButton}>
                                 <Text style={styles.menuButtonText}>
                                     Поместить в архив
                                 </Text>

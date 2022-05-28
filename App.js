@@ -1,7 +1,9 @@
 // import 'react-native-gesture-handler';
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import AsyncStorage, {
+    useAsyncStorage,
+} from "@react-native-async-storage/async-storage";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StatusBar } from "expo-status-bar";
@@ -67,8 +69,14 @@ export default function App() {
         writeNotes(notes);
     }, [notes]);
     React.useEffect(() => {
-        writeArchive(notes);
+        writeArchive(archive);
     }, [archive]);
+
+
+
+    const clearAsyncStorage = async () => {
+        AsyncStorage.clear();
+    };
 
     return (
         <NavigationContainer theme={MyTheme}>
@@ -94,6 +102,8 @@ export default function App() {
                                     setNotes={setNotes}
                                     openDrawer={openDrawer}
                                     setOpenDrawer={setOpenDrawer}
+                                    archive={archive}
+                                    setArchive={setArchive}
                                 />
                             )}
                         </Drawer.Screen>

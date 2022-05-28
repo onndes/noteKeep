@@ -13,6 +13,8 @@ export default function HomeScreen({
     notes,
     setNotes,
     setOpenDrawer,
+    archive,
+    setArchive,
 }) {
     const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
     const [searchValue, setSearchValue] = React.useState("");
@@ -34,6 +36,8 @@ export default function HomeScreen({
                     setNotes={setNotes}
                     selectedNotesIds={selectedNotesIds}
                     setSelectedNotesIds={setSelectedNotesIds}
+                    archive={archive}
+                    setArchive={setArchive}
                 />
             )}
             <View style={{ flex: 1 }}>

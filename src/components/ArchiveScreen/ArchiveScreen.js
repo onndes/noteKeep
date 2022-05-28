@@ -6,18 +6,18 @@ import SearchPanel from "./SearchPanel";
 
 const colorApp = getColorApp();
 
-export default function ArchiveScreen({ navigation, archive, setArchives }) {
+export default function ArchiveScreen({ navigation, archive, setArchive }) {
     const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
     const [searchValue, setSearchValue] = React.useState("");
 
     return (
-        <View style={styles.container}>
+        <>
             <SearchPanel navigation={navigation} searchValue={searchValue} />
             {archive && !!archive.length ? (
                 <View style={{ flex: 1 }}>
                     <NotesList
                         notes={archive}
-                        setNotes={setArchives}
+                        setNotes={setArchive}
                         selectedNotesIds={selectedNotesIds}
                         setSelectedNotesIds={setSelectedNotesIds}
                         navigation={navigation}
@@ -27,16 +27,14 @@ export default function ArchiveScreen({ navigation, archive, setArchives }) {
             ) : (
                 <Text style={styles.archiveEmptyText}>Архив пуст</Text>
             )}
-        </View>
+        </>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 16,
-    },
     archiveEmptyText: {
         color: colorApp.lightTwo,
         fontSize: 18,
+        paddingHorizontal: 12,
     },
 });
