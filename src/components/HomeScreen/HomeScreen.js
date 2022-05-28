@@ -12,12 +12,10 @@ export default function HomeScreen({
     navigation,
     notes,
     setNotes,
-    openDrawer,
     setOpenDrawer,
 }) {
     const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
     const [searchValue, setSearchValue] = React.useState("");
-    const route = useRoute();
 
     return (
         <>
@@ -51,12 +49,6 @@ export default function HomeScreen({
             <ButtonAddNote
                 navigation={navigation}
                 setSelectedNotesIds={setSelectedNotesIds}
-            />
-            <DrawerMenu
-                openDrawer={openDrawer}
-                setOpenDrawer={setOpenDrawer}
-                navigation={navigation}
-                routeName={route.name}
             />
         </>
     );

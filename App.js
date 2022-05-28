@@ -13,13 +13,12 @@ import customScreenOptions from "./src/components/DrawerMenu/customScreenOptions
 import IconBulb from "./src/common/IconJsx/IconBulb";
 import IconArchive from "./src/common/IconJsx/IconArchive";
 import ArchiveScreen from "./src/components/ArchiveScreen/ArchiveScreen";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
 
 const Drawer = createDrawerNavigator();
 
 const colorApp = getColorApp();
-const Stack = createNativeStackNavigator();
+
 const MyTheme = {
     ...DefaultTheme,
     colors: {
@@ -31,28 +30,45 @@ const MyTheme = {
 
 export default function App() {
     const [notes, setNotes] = React.useState([]);
+    const [archive, setArchive] = React.useState([]);
     const [openDrawer, setOpenDrawer] = React.useState(false);
 
     const { getItem: getNotesStorage, setItem: setNotesStorage } =
         useAsyncStorage("notes");
+    const { getItem: getArchiveStorage, setItem: setArchiveStorage } =
+        useAsyncStorage("archive");
 
     const readNotes = async () => {
         const notesJson = await getNotesStorage();
         const notes = notesJson ? JSON.parse(notesJson) : [];
         setNotes(notes);
     };
+    const readArchive = async () => {
+        const archiveJson = await getArchiveStorage();
+        const archive = archiveJson ? JSON.parse(archiveJson) : [];
+        setArchive(archive);
+    };
 
     const writeNotes = async (updatedNotes) => {
         await setNotesStorage(JSON.stringify(updatedNotes));
+    };
+    const writeArchive = async (updatedArchive) => {
+        await setArchiveStorage(JSON.stringify(updatedArchive));
     };
 
     React.useEffect(() => {
         readNotes();
     }, []);
+    React.useEffect(() => {
+        readArchive();
+    }, []);
 
     React.useEffect(() => {
         writeNotes(notes);
     }, [notes]);
+    React.useEffect(() => {
+        writeArchive(notes);
+    }, [archive]);
 
     return (
         <NavigationContainer theme={MyTheme}>
@@ -112,6 +128,8 @@ export default function App() {
                             {(props) => (
                                 <ArchiveScreen
                                     {...props}
+                                    archive={archive}
+                                    setArchive={setArchive}
                                     setNotes={setNotes}
                                     notes={notes}
                                 />

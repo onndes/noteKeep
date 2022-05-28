@@ -1,6 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Pressable, ScrollView } from "react-native";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
 
 import getColorApp from "../../../utils/colorApp";
 import NotesListItem from "./NotesListItem";

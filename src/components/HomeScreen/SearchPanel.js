@@ -8,7 +8,6 @@ const colorApp = getColorApp();
 export default function SearchPanel({
     searchValue,
     setSearchValue,
-    setOpenDrawer,
     navigation,
 }) {
     return (
