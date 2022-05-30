@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
+
 import getColorApp from "../../../utils/colorApp";
 
 export default function ButtonAddNote({ navigation, setSelectedNotesIds }) {

@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Text, Pressable, Animated } from "react-native";
-import getColorApp from "../../../utils/colorApp";
+import { View, StyleSheet, Text, Pressable } from "react-native";
 import OutsideView from "react-native-detect-press-outside";
+
+import getColorApp from "../../../utils/colorApp";
 const colorApp = getColorApp();
 
 export default function DrawerMenu({

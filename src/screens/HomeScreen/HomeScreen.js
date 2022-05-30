@@ -1,18 +1,15 @@
 import React from "react";
 import { View } from "react-native";
-import { useRoute } from "@react-navigation/native";
 
 import ButtonAddNote from "./ButtonAddNote";
-import NotesList from "./NotesList";
-import OptionsPanel from "./OptionsPanel";
-import SearchPanel from "./SearchPanel";
-import DrawerMenu from "../DrawerMenu/DrawerMenu";
+import NotesList from "../../components/NoteList/NotesList";
+import OptionsPanel from "../../components/OptionsPanel/OptionsPanel";
+import HomeSearchPanel from "./HomeSearchPanel";
 
 export default function HomeScreen({
     navigation,
     notes,
     setNotes,
-    setOpenDrawer,
     archive,
     setArchive,
 }) {
@@ -23,8 +20,7 @@ export default function HomeScreen({
         <>
             {!selectedNotesIds.length ? (
                 <View style={{ paddingRight: 15, paddingLeft: 15 }}>
-                    <SearchPanel
-                        setOpenDrawer={setOpenDrawer}
+                    <HomeSearchPanel
                         navigation={navigation}
                         searchValue={searchValue}
                         setSearchValue={setSearchValue}

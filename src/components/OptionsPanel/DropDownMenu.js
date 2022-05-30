@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Pressable, Text } from "react-native";
-import getColorApp from "../../../utils/colorApp";
 import uuid from "react-native-uuid";
+
+import getColorApp from "../../../utils/colorApp";
 
 const colorApp = getColorApp();
 

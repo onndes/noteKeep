@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Pressable } from "react-native";
+
 import IconArrow from "../../common/IconJsx/IconArrow";
 
 export default function NavPanel({ navigation: { navigate } }) {

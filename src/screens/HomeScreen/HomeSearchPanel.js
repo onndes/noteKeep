@@ -1,11 +1,12 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Pressable } from "react-native";
+
 import getColorApp from "../../../utils/colorApp";
 import IconMenu from "../../common/IconJsx/IconMenu";
 
 const colorApp = getColorApp();
 
-export default function SearchPanel({
+export default function HomeSearchPanel({
     searchValue,
     setSearchValue,
     navigation,

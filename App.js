@@ -9,13 +9,13 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { StatusBar } from "expo-status-bar";
 
 import getColorApp from "./utils/colorApp";
-import HomeScreen from "./src/components/HomeScreen/HomeScreen";
+import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
 import CustomDrawer from "./src/components/DrawerMenu/CustomDrawer";
 import customScreenOptions from "./src/components/DrawerMenu/customScreenOptions";
 import IconBulb from "./src/common/IconJsx/IconBulb";
 import IconArchive from "./src/common/IconJsx/IconArchive";
-import ArchiveScreen from "./src/components/ArchiveScreen/ArchiveScreen";
-import AddPostScreen from "./src/components/AddPostScreen/AddPostScreen";
+import ArchiveScreen from "./src/screens/ArchiveScreen/ArchiveScreen";
+import AddPostScreen from "./src/screens/AddPostScreen/AddPostScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -33,7 +33,6 @@ const MyTheme = {
 export default function App() {
     const [notes, setNotes] = React.useState([]);
     const [archive, setArchive] = React.useState([]);
-    const [openDrawer, setOpenDrawer] = React.useState(false);
 
     const { getItem: getNotesStorage, setItem: setNotesStorage } =
         useAsyncStorage("notes");
@@ -100,8 +99,6 @@ export default function App() {
                                     {...props}
                                     notes={notes}
                                     setNotes={setNotes}
-                                    openDrawer={openDrawer}
-                                    setOpenDrawer={setOpenDrawer}
                                     archive={archive}
                                     setArchive={setArchive}
                                 />

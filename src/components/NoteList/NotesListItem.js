@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Text, Pressable } from "react-native";
+
 import getColorApp from "../../../utils/colorApp";
 
 export default function NotesListItem({

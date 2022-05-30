@@ -1,22 +1,17 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Pressable, Text } from "react-native";
+
 import getColorApp from "../../../utils/colorApp";
 import IconClose from "../../common/IconJsx/IconClose";
 import IconMenu from "../../common/IconJsx/IconMenu";
 import IconSearch from "../../common/IconJsx/IconSearch";
-import DropDownMenu from "../HomeScreen/DropDownMenu";
-import OptionsPanel from "../HomeScreen/OptionsPanel";
 
 const colorApp = getColorApp();
 
-export default function SearchPanel({
+export default function ArchiveOptionsPanel({
     searchValue,
     setSearchValue,
     navigation,
-    archive,
-    setArchive,
-    setSelectedNotesIds,
-    selectedNotesIds,
 }) {
     const [activeSearch, setActiveSearch] = React.useState(false);
 

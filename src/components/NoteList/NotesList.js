@@ -1,10 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, Text, ScrollView } from "react-native";
 
 import getColorApp from "../../../utils/colorApp";
 import NotesListItem from "./NotesListItem";
-
-const colorApp = getColorApp();
 
 export default function NotesList({
     selectedNotesIds,

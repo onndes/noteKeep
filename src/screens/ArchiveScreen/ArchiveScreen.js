@@ -1,10 +1,12 @@
 import React from "react";
 import { View, StyleSheet, Text, ImageBackground } from "react-native";
+
 import getColorApp from "../../../utils/colorApp";
-import NotesList from "../HomeScreen/NotesList";
-import OptionsPanel from "../HomeScreen/OptionsPanel";
-import SearchPanel from "./SearchPanel";
+import NotesList from "../../components/NoteList/NotesList";
+import OptionsPanel from "../../components/OptionsPanel/OptionsPanel";
+import ArchiveOptionsPanel from "./ArchiveOptionsPanel";
 import image from "../../common/oldBooks.jpg";
+
 const colorApp = getColorApp();
 
 export default function ArchiveScreen({
@@ -21,7 +23,7 @@ export default function ArchiveScreen({
         <View style={{ flex: 1 }}>
             <ImageBackground source={image} style={styles.bg}></ImageBackground>
             {!selectedNotesIds.length ? (
-                <SearchPanel
+                <ArchiveOptionsPanel
                     navigation={navigation}
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}

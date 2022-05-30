@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 import uuid from "react-native-uuid";
+import { useIsFocused } from "@react-navigation/native";
 
 import getColorApp from "../../../utils/colorApp";
 import NavPanel from "./NavPanel";
-import { useIsFocused } from "@react-navigation/native";
 
 const colorApp = getColorApp();
 
