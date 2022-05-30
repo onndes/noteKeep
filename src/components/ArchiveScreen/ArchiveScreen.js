@@ -7,7 +7,13 @@ import SearchPanel from "./SearchPanel";
 import image from "../../common/oldBooks.jpg";
 const colorApp = getColorApp();
 
-export default function ArchiveScreen({ navigation, archive, setArchive }) {
+export default function ArchiveScreen({
+    navigation,
+    archive,
+    setArchive,
+    notes,
+    setNotes,
+}) {
     const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
     const [searchValue, setSearchValue] = React.useState("");
 
@@ -30,8 +36,10 @@ export default function ArchiveScreen({ navigation, archive, setArchive }) {
                     setSelectedNotesIds={setSelectedNotesIds}
                     notes={archive}
                     setNotes={setArchive}
-                    isOption={{ delete: true }}
+                    isOption={{ delete: true, getOutArchive: true }}
                     isArchive
+                    archive={notes}
+                    setArchive={setNotes}
                 />
             )}
             {archive && !!archive.length ? (

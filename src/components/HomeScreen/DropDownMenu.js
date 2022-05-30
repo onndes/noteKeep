@@ -96,6 +96,15 @@ export default function DropDownMenu({
                                     </Text>
                                 </Pressable>
                             )}
+                            {isOption.getOutArchive && (
+                                <Pressable
+                                    onPress={handleArchive}
+                                    style={styles.menuButton}>
+                                    <Text style={styles.menuButtonText}>
+                                        Разархивировать
+                                    </Text>
+                                </Pressable>
+                            )}
                         </View>
                     </View>
                 </>
