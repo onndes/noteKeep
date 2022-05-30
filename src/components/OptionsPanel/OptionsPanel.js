@@ -7,16 +7,7 @@ import DropDownMenu from "./DropDownMenu";
 
 const colorApp = getColorApp();
 
-export default function OptionsPanel({
-    setSelectedNotesIds,
-    selectedNotesIds,
-    setNotes,
-    notes,
-    archive,
-    setArchive,
-    isOption,
-    isArchive = false,
-}) {
+export default function OptionsPanel({ isArchive = false, ...props }) {
     return (
         <View
             style={[
@@ -29,20 +20,12 @@ export default function OptionsPanel({
             ]}>
             <View style={styles.wrapper}>
                 <View style={styles.closeButton}>
-                    <Pressable onPress={() => setSelectedNotesIds([])}>
+                    <Pressable onPress={() => props.setSelectedItemsIds([])}>
                         <IconClose fill={colorApp.light} />
                     </Pressable>
                 </View>
                 <View style={styles.menuBox}>
-                    <DropDownMenu
-                        selectedNotesIds={selectedNotesIds}
-                        setSelectedNotesIds={setSelectedNotesIds}
-                        setNotes={setNotes}
-                        notes={notes}
-                        archive={archive}
-                        setArchive={setArchive}
-                        isOption={isOption}
-                    />
+                    <DropDownMenu {...props} />
                 </View>
             </View>
         </View>

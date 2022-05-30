@@ -16,32 +16,33 @@ export default function ArchiveScreen({
     notes,
     setNotes,
 }) {
-    const [selectedNotesIds, setSelectedNotesIds] = React.useState([]);
+    const [selectedArchiveNotesIds, setSelectedArchiveNotesIds] =
+        React.useState([]);
     const [searchValue, setSearchValue] = React.useState("");
 
     return (
         <View style={{ flex: 1 }}>
             <ImageBackground source={image} style={styles.bg}></ImageBackground>
-            {!selectedNotesIds.length ? (
+            {!selectedArchiveNotesIds.length ? (
                 <ArchiveOptionsPanel
                     navigation={navigation}
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}
-                    selectedNotesIds={selectedNotesIds}
-                    setSelectedNotesIds={setSelectedNotesIds}
+                    selectedNotesIds={selectedArchiveNotesIds}
+                    setSelectedNotesIds={setSelectedArchiveNotesIds}
                     archive={archive}
                     setArchive={setArchive}
                 />
             ) : (
                 <OptionsPanel
-                    selectedNotesIds={selectedNotesIds}
-                    setSelectedNotesIds={setSelectedNotesIds}
-                    notes={archive}
-                    setNotes={setArchive}
-                    isOption={{ delete: true, getOutArchive: true }}
+                    selectedItemsIds={selectedArchiveNotesIds}
+                    setSelectedItemsIds={setSelectedArchiveNotesIds}
+                    items={archive}
+                    setItems={setArchive}
+                    isOptions={{ delete: true, getOutArchive: true }}
                     isArchive
-                    archive={notes}
-                    setArchive={setNotes}
+                    secondItems={notes}
+                    setSecondItems={setNotes}
                 />
             )}
             {archive && !!archive.length ? (
@@ -49,8 +50,8 @@ export default function ArchiveScreen({
                     <NotesList
                         notes={archive}
                         setNotes={setArchive}
-                        selectedNotesIds={selectedNotesIds}
-                        setSelectedNotesIds={setSelectedNotesIds}
+                        selectedNotesIds={selectedArchiveNotesIds}
+                        setSelectedNotesIds={setSelectedArchiveNotesIds}
                         navigation={navigation}
                         searchValue={searchValue}
                     />

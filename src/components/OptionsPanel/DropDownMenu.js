@@ -7,13 +7,13 @@ import getColorApp from "../../../utils/colorApp";
 const colorApp = getColorApp();
 
 export default function DropDownMenu({
-    notes,
-    setNotes,
-    selectedNotesIds,
-    setSelectedNotesIds,
-    archive,
-    setArchive,
-    isOption = {},
+    selectedItemsIds,
+    setSelectedItemsIds,
+    items,
+    setItems,
+    secondItems,
+    setSecondItems,
+    isOptions = {},
 }) {
     const [isOpenMenu, setOpenMenu] = React.useState(false);
 
@@ -22,34 +22,34 @@ export default function DropDownMenu({
     };
 
     const handleArchive = () => {
-        const selectedNotes = notes.filter((note) =>
-            selectedNotesIds.find((id) => note.id === id),
+        const selectedItems = items.filter((item) =>
+            selectedItemsIds.find((id) => item.id === id),
         );
-        setArchive([...selectedNotes, ...archive]);
+        setSecondItems([...selectedItems, ...secondItems]);
 
         handleDelete();
         setOpenMenu(false);
-        setSelectedNotesIds([]);
+        setSelectedItemsIds([]);
     };
 
     const handleDelete = () => {
-        const updateListNote = notes.filter((note) => {
-            return !selectedNotesIds.find((id) => note.id === id);
+        const updateListItem = items.filter((item) => {
+            return !selectedItemsIds.find((id) => item.id === id);
         });
 
-        setNotes(updateListNote);
+        setItems(updateListItem);
 
         setOpenMenu(false);
-        setSelectedNotesIds([]);
+        setSelectedItemsIds([]);
     };
 
     const handleCopy = () => {
-        const newCopyNote = notes.find(
-            (note) => note.id === selectedNotesIds[0],
+        const newCopyItem = items.find(
+            (item) => item.id === selectedItemsIds[0],
         );
-        setNotes([{ ...newCopyNote, id: uuid.v4() }, ...notes]);
+        setItems([{ ...newCopyItem, id: uuid.v4() }, ...items]);
         setOpenMenu(false);
-        setSelectedNotesIds([]);
+        setSelectedItemsIds([]);
     };
 
     return (
@@ -69,7 +69,7 @@ export default function DropDownMenu({
 
                     <View style={styles.menuContainer}>
                         <View style={styles.menuWrapper}>
-                            {!!isOption.archive && (
+                            {!!isOptions.archive && (
                                 <Pressable
                                     onPress={handleArchive}
                                     style={styles.menuButton}>
@@ -78,7 +78,7 @@ export default function DropDownMenu({
                                     </Text>
                                 </Pressable>
                             )}
-                            {!!isOption.delete && (
+                            {!!isOptions.delete && (
                                 <Pressable
                                     onPress={handleDelete}
                                     style={styles.menuButton}>
@@ -88,7 +88,7 @@ export default function DropDownMenu({
                                 </Pressable>
                             )}
 
-                            {selectedNotesIds.length === 1 && isOption.copy && (
+                            {selectedItemsIds.length === 1 && isOptions.copy && (
                                 <Pressable
                                     onPress={handleCopy}
                                     style={styles.menuButton}>
@@ -97,7 +97,7 @@ export default function DropDownMenu({
                                     </Text>
                                 </Pressable>
                             )}
-                            {isOption.getOutArchive && (
+                            {isOptions.getOutArchive && (
                                 <Pressable
                                     onPress={handleArchive}
                                     style={styles.menuButton}>

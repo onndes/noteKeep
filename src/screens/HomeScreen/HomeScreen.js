@@ -28,13 +28,13 @@ export default function HomeScreen({
                 </View>
             ) : (
                 <OptionsPanel
-                    notes={notes}
-                    setNotes={setNotes}
-                    selectedNotesIds={selectedNotesIds}
-                    setSelectedNotesIds={setSelectedNotesIds}
-                    archive={archive}
-                    setArchive={setArchive}
-                    isOption={{ archive: true, delete: true, copy: true }}
+                    items={notes}
+                    setItems={setNotes}
+                    selectedItemsIds={selectedNotesIds}
+                    setSelectedItemsIds={setSelectedNotesIds}
+                    secondItems={archive}
+                    setSecondItems={setArchive}
+                    isOptions={{ archive: true, delete: true, copy: true }}
                 />
             )}
             <View style={{ flex: 1 }}>
