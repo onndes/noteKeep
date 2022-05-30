@@ -14,9 +14,19 @@ export default function OptionsPanel({
     notes,
     archive,
     setArchive,
+    isOption,
+    isArchive = false,
 }) {
     return (
-        <View style={styles.container}>
+        <View
+            style={[
+                styles.container,
+                {
+                    backgroundColor: isArchive
+                        ? colorApp.backgroundActionOpacity
+                        : colorApp.backgroundAction,
+                },
+            ]}>
             <View style={styles.wrapper}>
                 <View style={styles.closeButton}>
                     <Pressable onPress={() => setSelectedNotesIds([])}>
@@ -31,6 +41,7 @@ export default function OptionsPanel({
                         notes={notes}
                         archive={archive}
                         setArchive={setArchive}
+                        isOption={isOption}
                     />
                 </View>
             </View>

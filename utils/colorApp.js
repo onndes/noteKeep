@@ -2,7 +2,8 @@ export default function getColorApp(theme = "dark") {
     if (theme === "dark") {
         return {
             backgroundMain: "#181c1f",
-            backgroundAction: "#1f282d",
+            backgroundAction: "rgba(31,40,45, 1)",
+            backgroundActionOpacity: "rgba(31,40,45, .6)",
             light: "#eeeff1",
             lightTwo: "#73777a",
             selected: "#69d5ff",

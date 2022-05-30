@@ -12,6 +12,7 @@ export default function DropDownMenu({
     setSelectedNotesIds,
     archive,
     setArchive,
+    isOption = {},
 }) {
     const [isOpenMenu, setOpenMenu] = React.useState(false);
 
@@ -67,22 +68,26 @@ export default function DropDownMenu({
 
                     <View style={styles.menuContainer}>
                         <View style={styles.menuWrapper}>
-                            <Pressable
-                                onPress={handleArchive}
-                                style={styles.menuButton}>
-                                <Text style={styles.menuButtonText}>
-                                    Поместить в архив
-                                </Text>
-                            </Pressable>
-                            <Pressable
-                                onPress={handleDelete}
-                                style={styles.menuButton}>
-                                <Text style={styles.menuButtonText}>
-                                    Удалить
-                                </Text>
-                            </Pressable>
+                            {!!isOption.archive && (
+                                <Pressable
+                                    onPress={handleArchive}
+                                    style={styles.menuButton}>
+                                    <Text style={styles.menuButtonText}>
+                                        Поместить в архив
+                                    </Text>
+                                </Pressable>
+                            )}
+                            {!!isOption.delete && (
+                                <Pressable
+                                    onPress={handleDelete}
+                                    style={styles.menuButton}>
+                                    <Text style={styles.menuButtonText}>
+                                        Удалить
+                                    </Text>
+                                </Pressable>
+                            )}
 
-                            {selectedNotesIds.length === 1 && (
+                            {selectedNotesIds.length === 1 && isOption.copy && (
                                 <Pressable
                                     onPress={handleCopy}
                                     style={styles.menuButton}>

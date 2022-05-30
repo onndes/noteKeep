@@ -38,6 +38,7 @@ export default function HomeScreen({
                     setSelectedNotesIds={setSelectedNotesIds}
                     archive={archive}
                     setArchive={setArchive}
+                    isOption={{ archive: true, delete: true, copy: true }}
                 />
             )}
             <View style={{ flex: 1 }}>

@@ -1,7 +1,11 @@
 import React from "react";
 import { View, StyleSheet, TextInput, Pressable, Text } from "react-native";
 import getColorApp from "../../../utils/colorApp";
+import IconClose from "../../common/IconJsx/IconClose";
 import IconMenu from "../../common/IconJsx/IconMenu";
+import IconSearch from "../../common/IconJsx/IconSearch";
+import DropDownMenu from "../HomeScreen/DropDownMenu";
+import OptionsPanel from "../HomeScreen/OptionsPanel";
 
 const colorApp = getColorApp();
 
@@ -9,6 +13,10 @@ export default function SearchPanel({
     searchValue,
     setSearchValue,
     navigation,
+    archive,
+    setArchive,
+    setSelectedNotesIds,
+    selectedNotesIds,
 }) {
     const [activeSearch, setActiveSearch] = React.useState(false);
 
@@ -19,15 +27,29 @@ export default function SearchPanel({
                     <IconMenu fill={colorApp.light} height='25' width='25' />
                 </Pressable>
                 {activeSearch ? (
-                    <TextInput
-                        onChangeText={(text) => setSearchValue(text)}
-                        value={searchValue}
-                        style={styles.inputSearch}
-                        placeholder='Искать в заметках'
-                        placeholderTextColor={colorApp.light}
-                    />
+                    <View style={styles.searchPanelBox}>
+                        <TextInput
+                            onChangeText={(text) => setSearchValue(text)}
+                            value={searchValue}
+                            style={styles.inputSearch}
+                            placeholder='Искать в архиве'
+                            placeholderTextColor={colorApp.lightTwo}
+                        />
+                        <Pressable
+                            onPress={() => {
+                                setActiveSearch(false);
+                                setSearchValue("");
+                            }}>
+                            <IconClose fill={colorApp.light} />
+                        </Pressable>
+                    </View>
                 ) : (
-                    <Text style={styles.searchPanelTitle}>Архив</Text>
+                    <View style={styles.topPanelBox}>
+                        <Text style={styles.topPanelTitle}>Архив</Text>
+                        <Pressable onPress={() => setActiveSearch(true)}>
+                            <IconSearch fill={colorApp.light} />
+                        </Pressable>
+                    </View>
                 )}
             </View>
         </View>
@@ -36,9 +58,9 @@ export default function SearchPanel({
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 24,
-        marginTop: 48,
-        marginHorizontal: 12
+        marginBottom: 32,
+        marginTop: 56,
+        marginHorizontal: 12,
     },
 
     wrapper: {
@@ -50,9 +72,27 @@ const styles = StyleSheet.create({
         color: colorApp.light,
         fontSize: 17,
     },
-    searchPanelTitle: {
+    dropDownBox: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "flex-end",
+    },
+    searchPanelBox: {
+        marginHorizontal: 12,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flex: 1,
+    },
+    topPanelBox: {
+        paddingLeft: 16,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        flex: 1,
+    },
+    topPanelTitle: {
         color: colorApp.light,
         fontSize: 20,
-        paddingLeft: 16,
     },
 });
