@@ -54,7 +54,7 @@ export default function DropDownMenu({
 
     return (
         <View style={styles.container}>
-            <Pressable onPress={handleButtonOpenMenu} style={{}}>
+            <Pressable style={{ padding: 12 }} onPress={handleButtonOpenMenu}>
                 <View style={styles.iconBox}>
                     <View style={styles.iconItem}></View>
                     <View style={styles.iconItem}></View>
@@ -116,7 +116,6 @@ export default function DropDownMenu({
 
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
         justifyContent: "space-between",
         elevation: 3,
     },

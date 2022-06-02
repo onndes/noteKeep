@@ -18,7 +18,9 @@ export default function ArchiveOptionsPanel({
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
-                <Pressable onPress={() => navigation.openDrawer()}>
+                <Pressable
+                    style={{ padding: 12 }}
+                    onPress={() => navigation.openDrawer()}>
                     <IconMenu fill={colorApp.light} height='25' width='25' />
                 </Pressable>
                 {activeSearch ? (
@@ -31,6 +33,7 @@ export default function ArchiveOptionsPanel({
                             placeholderTextColor={colorApp.lightTwo}
                         />
                         <Pressable
+                            style={{ padding: 12 }}
                             onPress={() => {
                                 setActiveSearch(false);
                                 setSearchValue("");
@@ -41,7 +44,9 @@ export default function ArchiveOptionsPanel({
                 ) : (
                     <View style={styles.topPanelBox}>
                         <Text style={styles.topPanelTitle}>Архив</Text>
-                        <Pressable onPress={() => setActiveSearch(true)}>
+                        <Pressable
+                            style={{ padding: 12 }}
+                            onPress={() => setActiveSearch(true)}>
                             <IconSearch fill={colorApp.light} />
                         </Pressable>
                     </View>
@@ -53,9 +58,9 @@ export default function ArchiveOptionsPanel({
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 32,
-        marginTop: 56,
-        marginHorizontal: 12,
+        marginBottom: 16,
+        marginTop: 40,
+        marginHorizontal: 8,
     },
 
     wrapper: {

@@ -20,7 +20,9 @@ export default function OptionsPanel({ isArchive = false, ...props }) {
             ]}>
             <View style={styles.wrapper}>
                 <View style={styles.closeButton}>
-                    <Pressable onPress={() => props.setSelectedItemsIds([])}>
+                    <Pressable
+                        style={{ padding: 12 }}
+                        onPress={() => props.setSelectedItemsIds([])}>
                         <IconClose fill={colorApp.light} />
                     </Pressable>
                 </View>
@@ -34,7 +36,8 @@ export default function OptionsPanel({ isArchive = false, ...props }) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 40,
+        paddingTop: 42,
+        paddingHorizontal: 8,
         marginBottom: 16,
         backgroundColor: colorApp.backgroundAction,
     },
@@ -43,8 +46,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
     },
-    closeButton: {
-        padding: 16,
-    },
+    closeButton: {},
     menuBox: {},
 });

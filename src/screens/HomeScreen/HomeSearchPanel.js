@@ -14,8 +14,10 @@ export default function HomeSearchPanel({
     return (
         <View style={styles.container}>
             <View style={styles.wrapper}>
-                <Pressable onPress={() => navigation.openDrawer()}>
-                    <IconMenu fill={colorApp.light} height='25' />
+                <Pressable
+                    style={styles.pressable}
+                    onPress={() => navigation.openDrawer()}>
+                    <IconMenu fill={colorApp.light} height='25' width='25' />
                 </Pressable>
                 <TextInput
                     onChangeText={(text) => setSearchValue(text)}
@@ -38,12 +40,18 @@ const styles = StyleSheet.create({
     },
 
     wrapper: {
-        padding: 16,
         flexDirection: "row",
         alignItems: "center",
     },
+    pressable: {
+        padding: 16,
+        paddingRight: 12,
+    },
     inputSearch: {
+        flex: 1,
         color: colorApp.light,
         fontSize: 17,
+        padding: 16,
+        paddingLeft: 4,
     },
 });
