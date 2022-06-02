@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "noteKeep",
+    "name": "Note Keep",
     "slug": "noteKeep",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/notesPlus.png",
     "userInterfaceStyle": "#181c1f",
     "splash": {
       "image": "./assets/splash.png",
