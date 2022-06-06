@@ -87,7 +87,6 @@ export default function AddPostScreen({
         <View style={styles.container}>
             <NavPanel navigation={navigation} isArchive={params?.isArchive} />
             <TextInput
-                autoFocus
                 multiline={true}
                 maxLength={50}
                 style={styles.inputTitle}
