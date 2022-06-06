@@ -71,8 +71,6 @@ export default function App() {
         writeArchive(archive);
     }, [archive]);
 
-
-
     const clearAsyncStorage = async () => {
         AsyncStorage.clear();
     };
@@ -121,6 +119,8 @@ export default function App() {
                                     {...props}
                                     setNotes={setNotes}
                                     notes={notes}
+                                    archive={archive}
+                                    setArchive={setArchive}
                                 />
                             )}
                         </Drawer.Screen>

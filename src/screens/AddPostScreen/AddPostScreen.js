@@ -13,6 +13,8 @@ export default function AddPostScreen({
     route: { params },
     notes,
     setNotes,
+    archive,
+    setArchive,
 }) {
     const [title, setTitle] = React.useState(
         params?.titleEditableNote ? params.titleEditableNote : "",
@@ -21,6 +23,7 @@ export default function AddPostScreen({
         params?.textEditableNote ? params.textEditableNote : "",
     );
     const isFocused = useIsFocused();
+
     const onChangeTitle = (value) => setTitle(value);
     const onChangeText = (value) => setText(value);
 
@@ -44,13 +47,23 @@ export default function AddPostScreen({
                     text,
                 };
                 if (params?.idEditNote) {
-                    const updateNotes = notes.map((note) => {
-                        if (note.id === params.idEditNote) {
-                            return newNote;
-                        }
-                        return note;
-                    });
-                    setNotes(updateNotes);
+                    if (params?.isArchive) {
+                        const updateNotes = archive.map((note) => {
+                            if (note.id === params.idEditNote) {
+                                return newNote;
+                            }
+                            return note;
+                        });
+                        setArchive(updateNotes);
+                    } else {
+                        const updateNotes = notes.map((note) => {
+                            if (note.id === params.idEditNote) {
+                                return newNote;
+                            }
+                            return note;
+                        });
+                        setNotes(updateNotes);
+                    }
                 } else {
                     setNotes([...notes, newNote]);
                 }

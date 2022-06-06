@@ -10,6 +10,7 @@ export default function NotesList({
     notes,
     navigation,
     searchValue,
+    isArchive,
 }) {
     const [pressInNote, setPressInNote] = React.useState(null);
 
@@ -30,6 +31,7 @@ export default function NotesList({
                 titleEditableNote: note.title ? note.title : "",
                 textEditableNote: note.text ? note.text : "",
                 idEditNote: note.id,
+                isArchive: isArchive,
             });
         }
     };

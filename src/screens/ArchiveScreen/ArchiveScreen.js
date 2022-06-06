@@ -54,6 +54,7 @@ export default function ArchiveScreen({
                         setSelectedNotesIds={setSelectedArchiveNotesIds}
                         navigation={navigation}
                         searchValue={searchValue}
+                        isArchive
                     />
                 </View>
             ) : (
