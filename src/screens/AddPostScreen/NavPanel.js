@@ -3,11 +3,17 @@ import { View, StyleSheet, Pressable } from "react-native";
 
 import IconArrow from "../../common/IconJsx/IconArrow";
 
-export default function NavPanel({ navigation }) {
+export default function NavPanel({ navigation, isArchive }) {
     return (
         <View style={styles.container}>
             <Pressable
-                onPress={() => navigation.goBack()}
+                onPress={() => {
+                    if (isArchive) {
+                        navigation.navigate("Archive");
+                    } else {
+                        navigation.goBack("Home");
+                    }
+                }}
                 style={styles.iconArrowBox}>
                 <IconArrow color='white' />
             </Pressable>

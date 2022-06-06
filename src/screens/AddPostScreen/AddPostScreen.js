@@ -24,8 +24,8 @@ export default function AddPostScreen({
     );
     const isFocused = useIsFocused();
 
-    const onChangeTitle = (value) => setTitle(value);
-    const onChangeText = (value) => setText(value);
+    const onChangeTitle = (value) => setTitle(value.trim());
+    const onChangeText = (value) => setText(value.trim());
 
     React.useEffect(() => {
         if (isFocused) {
@@ -34,54 +34,57 @@ export default function AddPostScreen({
         }
     }, []);
 
-    React.useEffect(() => {
-        const unsubscribe = navigation.addListener("blur", () => {
-            if (
-                (title && title.trim().length) ||
-                (text && text.trim().length)
-            ) {
-                const id = params?.idEditNote ? params.idEditNote : uuid.v4();
-                const newNote = {
-                    id,
-                    title,
-                    text,
-                };
-                if (params?.idEditNote) {
-                    if (params?.isArchive) {
-                        const updateNotes = archive.map((note) => {
-                            if (note.id === params.idEditNote) {
-                                return newNote;
-                            }
-                            return note;
-                        });
-                        setArchive(updateNotes);
-                    } else {
-                        const updateNotes = notes.map((note) => {
-                            if (note.id === params.idEditNote) {
-                                return newNote;
-                            }
-                            return note;
-                        });
-                        setNotes(updateNotes);
-                    }
+    const handleExitAddPostScreen = () => {
+        if ((title && title.length) || (text && text.length)) {
+            const id = params?.idEditNote ? params.idEditNote : uuid.v4();
+            const newNote = {
+                id,
+                title,
+                text,
+            };
+
+            if (params?.idEditNote) {
+                if (params?.isArchive) {
+                    const updateArchiveNotes = archive.map((archiveNote) => {
+                        if (archiveNote.id === params.idEditNote) {
+                            return newNote;
+                        }
+                        return archiveNote;
+                    });
+                    setArchive(updateArchiveNotes);
                 } else {
-                    setNotes([...notes, newNote]);
+                    const updateNotes = notes.map((note) => {
+                        if (note.id === params.idEditNote) {
+                            return newNote;
+                        }
+                        return note;
+                    });
+                    setNotes(updateNotes);
                 }
+            } else {
+                setNotes([...notes, newNote]);
             }
-            setTitle("");
-            setText("");
-            navigation.setParams({
-                titleEditableNote: "",
-                textEditableNote: "",
-                idEditNote: null,
-            });
+        }
+        setTitle("");
+        setText("");
+        navigation.setParams({
+            titleEditableNote: "",
+            textEditableNote: "",
+            idEditNote: null,
         });
+    };
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener(
+            "blur",
+            handleExitAddPostScreen,
+        );
         return unsubscribe;
     }, [navigation, title, text]);
 
     return (
         <View style={styles.container}>
-            <NavPanel navigation={navigation} />
+            <NavPanel navigation={navigation} isArchive={params?.isArchive} />
             <TextInput
                 multiline={true}
                 maxLength={50}
