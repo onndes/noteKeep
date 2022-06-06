@@ -27,6 +27,7 @@ export default function ArchiveOptionsPanel({
                     <View style={styles.searchPanelBox}>
                         <TextInput
                             onChangeText={(text) => setSearchValue(text)}
+                            autoFocus
                             value={searchValue}
                             style={styles.inputSearch}
                             placeholder='Искать в архиве'
@@ -71,6 +72,8 @@ const styles = StyleSheet.create({
     inputSearch: {
         color: colorApp.light,
         fontSize: 17,
+        flex: 1,
+        padding: 12,
     },
     dropDownBox: {
         flex: 1,
@@ -78,7 +81,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     searchPanelBox: {
-        marginHorizontal: 12,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
@@ -86,6 +88,7 @@ const styles = StyleSheet.create({
     },
     topPanelBox: {
         paddingLeft: 16,
+        paddingBottom: 4,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",

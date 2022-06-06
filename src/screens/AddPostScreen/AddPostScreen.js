@@ -24,8 +24,8 @@ export default function AddPostScreen({
     );
     const isFocused = useIsFocused();
 
-    const onChangeTitle = (value) => setTitle(value.trim());
-    const onChangeText = (value) => setText(value.trim());
+    const onChangeTitle = (value) => setTitle(value);
+    const onChangeText = (value) => setText(value);
 
     React.useEffect(() => {
         if (isFocused) {
@@ -35,7 +35,7 @@ export default function AddPostScreen({
     }, []);
 
     const handleExitAddPostScreen = () => {
-        if ((title && title.length) || (text && text.length)) {
+        if ((title && title.trim().length) || (text && text.trim().length)) {
             const id = params?.idEditNote ? params.idEditNote : uuid.v4();
             const newNote = {
                 id,
@@ -67,6 +67,7 @@ export default function AddPostScreen({
         }
         setTitle("");
         setText("");
+
         navigation.setParams({
             titleEditableNote: "",
             textEditableNote: "",
@@ -86,6 +87,7 @@ export default function AddPostScreen({
         <View style={styles.container}>
             <NavPanel navigation={navigation} isArchive={params?.isArchive} />
             <TextInput
+                autoFocus
                 multiline={true}
                 maxLength={50}
                 style={styles.inputTitle}
