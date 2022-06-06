@@ -4,7 +4,7 @@
     "slug": "noteKeep",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/notesPlus.png",
+    "icon": "./assets/notesIcon.png",
     "userInterfaceStyle": "#181c1f",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/notesPlus.png",
+        "foregroundImage": "./assets/notesIcon.png",
         "backgroundColor": "#181c1f"
       },
       "package": "com.onndes.noteKeep"
